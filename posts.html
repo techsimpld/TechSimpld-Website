@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KFGHVDB66"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-1KFGHVDB66');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5214277715351322"
+    crossorigin="anonymous"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Lab, Proxmox, Docker &amp; Obsidian Tutorials | Tech Simpld</title>
+  <meta name="description"
+    content="Step-by-step technical tutorials for Proxmox home labs, Docker containers, network DNS security, and Obsidian note-taking workflows.">
+  <link rel="canonical" href="https://techsimpld.com/posts.html">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / SEO -->
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Simpld">
+  <meta property="og:url" content="https://techsimpld.com/posts.html">
+  <meta property="og:title" content="Home Lab, Proxmox, Docker &amp; Obsidian Tutorials | Tech Simpld">
+  <meta property="og:description" content="Step-by-step technical tutorials for Proxmox home labs, Docker containers, network DNS security, and Obsidian note-taking workflows.">
+  <meta property="og:image" content="https://techsimpld.com/images/obsidian-vault.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Home Lab, Proxmox, Docker &amp; Obsidian Tutorials | Tech Simpld">
+  <meta name="twitter:description"
+    content="Step-by-step technical tutorials for Proxmox home labs, Docker containers, network DNS security, and Obsidian note-taking workflows.">
+  <meta name="twitter:image" content="https://techsimpld.com/images/obsidian-vault.png">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Home Lab, Proxmox, Docker & Obsidian Tutorials",
+    "url": "https://techsimpld.com/posts.html",
+    "description": "Step-by-step technical tutorials for Proxmox home labs, Docker containers, network DNS security, and Obsidian note-taking workflows.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Tech Simpld",
+      "url": "https://techsimpld.com/"
+    }
+  }
+  </script>
+
+  <!-- DNS Prefetch & Preconnect for Speed -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" type="image/png" href="favicon.png">
+
+    <!-- Google Fonts Preconnect & Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        Tech Simpld<span class="logo-dot"></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="posts.html" class="nav-link active">Posts</a></li>
+        <li><a href="resources.html" class="nav-link">Resources</a></li>
+        <li><a href="tools.html" class="nav-link">Tools</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="https://youtube.com/@TechSimpld" target="_blank" class="nav-link">YouTube</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://youtube.com/@TechSimpld" target="_blank" class="btn btn-primary btn-sm" id="subscribeHeaderBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+          Subscribe
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="main-layout">
+
+    <!-- Page Hero Title -->
+    <section class="hero" style="padding: 2rem 0 3rem;">
+      <div class="badge badge-cyan">Productivity Guides</div>
+      <h1 class="hero-title">Step-by-Step <span>Posts</span></h1>
+      <p class="hero-tagline" style="max-width: 650px; margin: 0 auto;">
+        No fluff, no filler: just detailed written guides and companion videos to help you configure Obsidian, deploy docker containers, and build a high-performance self-hosted setup.
+      </p>
+    </section>
+
+    <!-- Tutorials Grid -->
+    <section style="margin: 2rem 0 4rem 0;">
+          <!-- Live Search Bar -->
+    <div class="posts-search-wrapper">
+      <svg class="posts-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="search" id="postsSearch" class="posts-search-input" placeholder="Search 27 tutorials by keyword (e.g. Proxmox, CouchDB, Dataview)..." autocomplete="off" aria-label="Search tutorials">
+    </div>
+
+    <!-- Category Filter Controls -->
+    <div class="category-filters">
+      <button class="filter-btn active" data-filter="all">All Topics (27)</button>
+      <button class="filter-btn" data-filter="obsidian">Obsidian &amp; PKM</button>
+      <button class="filter-btn" data-filter="proxmox">Proxmox &amp; Home Lab</button>
+      <button class="filter-btn" data-filter="docker">Docker &amp; Containers</button>
+      <button class="filter-btn" data-filter="networking">Network &amp; Security</button>
+    </div>
+
+      <div class="tutorials-grid">
+
+        <!-- Post 27: Dockhand Docker Manager Portainer Alternative -->
+        <article class="card" data-category="docker proxmox">
+          <div class="card-image-wrapper">
+            <a href="posts/dockhand-docker-manager-portainer-alternative.html">
+              <picture>
+                <source srcset="images/dockhand-docker-manager.webp" type="image/webp">
+                <img class="card-image" src="images/dockhand-docker-manager.png" alt="Dockhand Docker Manager Portainer Alternative Guide Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-cyan);">Docker &amp; Containers</span>
+              <span>-</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/dockhand-docker-manager-portainer-alternative.html">Goodbye Portainer: Deploy Dockhand for Modern Multi-Server Docker Management</a></h3>
+            <p class="card-excerpt">
+              Portainer froze Community Edition at 2.45 and closed off version 3.0. Deploy Dockhand and the Hawser agent for unlimited free multi-node Docker management with in-container file editing and CVE security audits.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">November 2026</span>
+              <a href="posts/dockhand-docker-manager-portainer-alternative.html" id="readPostBtn-dockhand-manager" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 26: Arcane Docker Watchtower Replacement -->
+        <article class="card" data-category="docker">
+          <div class="card-image-wrapper">
+            <a href="posts/arcane-docker-watchtower-replacement.html">
+              <picture>
+                <source srcset="images/arcane-watchtower-replacement.webp" type="image/webp">
+                <img class="card-image" src="images/arcane-watchtower-replacement.png" alt="Arcane Docker Watchtower Replacement Guide Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-cyan);">Docker &amp; Containers</span>
+              <span>-</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/arcane-docker-watchtower-replacement.html">Watchtower Is Dead: Why Arcane Is the Safer Docker Auto-Update Manager</a></h3>
+            <p class="card-excerpt">
+              Watchtower was officially archived in December 2025. Replace it with Arcane to prevent 3:00 AM database crashes with release delay windows, autoheal recovery, and major version protection.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">November 2026</span>
+              <a href="posts/arcane-docker-watchtower-replacement.html" id="readPostBtn-arcane-updater" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 25: AdGuard Home 1.0 Beta Setup Guide -->
+        <article class="card" data-category="proxmox networking">
+          <div class="card-image-wrapper">
+            <a href="posts/adguard-home-1-0-beta-setup-guide.html">
+              <picture>
+                <source srcset="images/Setup%20Adguard.webp" type="image/webp">
+                <img class="card-image" src="images/Setup%20Adguard.png" alt="AdGuard Home 1.0 Beta Ubuntu LXC Setup Guide Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-cyan);">DNS &amp; Security</span>
+              <span>-</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/adguard-home-1-0-beta-setup-guide.html">Setting Up AdGuard Home 1.0 Beta in an Ubuntu LXC Container</a></h3>
+            <p class="card-excerpt">
+              Deploy the redesigned AdGuard Home 1.0 Beta with zero Docker overhead. Fix Ubuntu port 53 stub conflicts, configure custom adlists, and explore 1-click service blocking.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">November 2026</span>
+              <a href="posts/adguard-home-1-0-beta-setup-guide.html" id="readPostBtn-adguard-1-0-beta" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 24: Obsidian Flashcards True Recall FSRS -->
+        <article class="card" data-category="obsidian">
+          <div class="card-image-wrapper">
+            <a href="posts/obsidian-flashcards-true-recall-fsrs.html">
+              <picture>
+                <source srcset="images/Obsidian%20Flashcards%20Made%20Simple.webp" type="image/webp">
+                <img class="card-image" src="images/Obsidian%20Flashcards%20Made%20Simple.png" alt="Obsidian Flashcards Made Simple True Recall Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-purple);">Obsidian &amp; PKM</span>
+              <span>-</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/obsidian-flashcards-true-recall-fsrs.html">Obsidian Flashcards Made Simple: Active Recall with True Recall &amp; FSRS</a></h3>
+            <p class="card-excerpt">
+              Turn your Obsidian vault notes into flashcards without leaving the app. Master the modern FSRS algorithm vs SM-2, auto-generate cards with local AI, and track study streaks.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">November 2026</span>
+              <a href="posts/obsidian-flashcards-true-recall-fsrs.html" id="readPostBtn-obsidian-true-recall" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 23: Container vs VM -->
+        <article class="card" data-category="proxmox docker">
+          <div class="card-image-wrapper">
+            <a href="posts/container-vs-vm-which-should-you-use.html">
+              <picture>
+                <source srcset="images/container-vs-vm-which-should-you-use.webp" type="image/webp">
+                <img class="card-image" src="images/container-vs-vm-which-should-you-use.png" alt="Container vs VM Proxmox Benchmark Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-purple);">Virtualization</span>
+              <span>-</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/container-vs-vm-which-should-you-use.html">Container vs VM Which Should You Use? Proxmox Benchmarks</a></h3>
+            <p class="card-excerpt">
+              Direct side-by-side comparison between Docker/LXC containers and full Proxmox VMs. Real Apache Benchmark stress test numbers and memory overhead.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">October 2026</span>
+              <a href="posts/container-vs-vm-which-should-you-use.html" id="readPostBtn-container-vs-vm" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 22: Built My Own YouTube Tools -->
+        <article class="card" data-category="docker">
+          <div class="card-image-wrapper">
+            <a href="posts/custom-youtube-creator-tools-dashboard.html">
+              <picture>
+                <source srcset="images/custom-youtube-creator-tools.webp" type="image/webp">
+                <img class="card-image" src="images/custom-youtube-creator-tools.png" alt="Custom YouTube Creator Tools Dashboard Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: #ec4899;">Self-Hosted</span>
+              <span>-</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/custom-youtube-creator-tools-dashboard.html">I Got Tired of Bad YouTube Creator Tools, So I Built My Own</a></h3>
+            <p class="card-excerpt">
+              Build a self-hosted creator studio dashboard to replace VidIQ and TubeBuddy. Private transcript analysis, comment mining, and posting time analytics.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">October 2026</span>
+              <a href="posts/custom-youtube-creator-tools-dashboard.html" id="readPostBtn-youtube-tools" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 21: Local LLM vs Cloud AI -->
+        <article class="card" data-category="proxmox">
+          <div class="card-image-wrapper">
+            <a href="posts/local-llm-vs-cloud-ai-ollama-claude.html">
+              <picture>
+                <source srcset="images/local-llm-vs-cloud-ai.webp" type="image/webp">
+                <img class="card-image" src="images/local-llm-vs-cloud-ai.png" alt="Local LLM vs Cloud AI Ollama vs Claude Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: #3b82f6;">AI & Hardware</span>
+              <span>-</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/local-llm-vs-cloud-ai-ollama-claude.html">Local LLM vs Cloud AI: Ollama vs Claude Compared Side-by-Side</a></h3>
+            <p class="card-excerpt">
+              Compare local open-weight models via Ollama against cloud models like Claude. Learn how tokenization, chunk overlap, and VRAM limits impact performance.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">September 2026</span>
+              <a href="posts/local-llm-vs-cloud-ai-ollama-claude.html" id="readPostBtn-local-vs-cloud" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 20: Manage Time and Tasks in Obsidian -->
+        <article class="card" data-category="obsidian">
+          <div class="card-image-wrapper">
+            <a href="posts/manage-time-tasks-obsidian-gtd.html">
+              <picture>
+                <source srcset="images/obsidian-manage-tasks-calendar-gtd.webp" type="image/webp">
+                <img class="card-image" src="images/obsidian-manage-tasks-calendar-gtd.png" alt="Manage Time and Tasks in Obsidian Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-purple);">Obsidian</span>
+              <span>-</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/manage-time-tasks-obsidian-gtd.html">Manage Time and Tasks in Obsidian: GTD Tasks & Kalendae Guide</a></h3>
+            <p class="card-excerpt">
+              Turn Obsidian into a Getting Things Done command center with GTD Tasks and Kalendae date-picker plugins. Full configuration walkthrough.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">September 2026</span>
+              <a href="posts/manage-time-tasks-obsidian-gtd.html" id="readPostBtn-gtd-tasks" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 19: Put Claude in Obsidian -->
+        <article class="card" data-category="obsidian">
+          <div class="card-image-wrapper">
+            <a href="posts/claude-in-obsidian-copilot-guide.html">
+              <picture>
+                <source srcset="images/claude-in-obsidian.webp" type="image/webp">
+                <img class="card-image" src="images/claude-in-obsidian.jpg" alt="Put Claude in Obsidian Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: #f59e0b;">AI & Obsidian</span>
+              <span>-</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/claude-in-obsidian-copilot-guide.html">Put Claude in Obsidian: Pay-As-You-Go AI Note Assistant Setup</a></h3>
+            <p class="card-excerpt">
+              Stop paying $20/month for web subscriptions. Connect Anthropic's Claude API directly to Obsidian using Copilot for pennies per task.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">September 2026</span>
+              <a href="posts/claude-in-obsidian-copilot-guide.html" id="readPostBtn-claude-obsidian" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 18: Sync Obsidian for Free with CouchDB -->
+        <article class="card" data-category="obsidian">
+          <div class="card-image-wrapper">
+            <a href="posts/sync-obsidian-for-free-couchdb.html">
+              <picture>
+                <source srcset="images/sync-obsidian-for-free-couchdb.webp" type="image/webp">
+                <img class="card-image" src="images/sync-obsidian-for-free-couchdb.jpg" alt="Sync Obsidian For Free With CouchDB Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-purple);">Obsidian Sync</span>
+              <span>-</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/sync-obsidian-for-free-couchdb.html">Sync Obsidian for Free with CouchDB: Step-by-Step Self-Hosted Guide</a></h3>
+            <p class="card-excerpt">
+              Sync your Obsidian vault across PC, Mac, iPhone, and Android for free using CouchDB, Docker, and the Self-Hosted LiveSync plugin.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">September 2026</span>
+              <a href="posts/sync-obsidian-for-free-couchdb.html" id="readPostBtn-couchdb-sync" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+
+        <!-- Post 17: Nextcloud Proxmox Setup -->
+        <article class="card" data-category="proxmox networking">
+          <div class="card-image-wrapper">
+            <a href="posts/nextcloud-proxmox-cloudflare-tunnel-setup.html">
+              <picture>
+                <source srcset="images/Nextcloud Proxmox Setup The Best Free Google Drive Replacement.webp" type="image/webp">
+                <img class="card-image" src="images/Nextcloud Proxmox Setup The Best Free Google Drive Replacement.jpg" alt="Nextcloud Proxmox Setup Guide Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-purple);">Self-Hosted</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/nextcloud-proxmox-cloudflare-tunnel-setup.html">Nextcloud Proxmox Setup: The Best Free Google Drive Replacement</a></h3>
+            <p class="card-excerpt">
+              Deploy Nextcloud All-in-One on a lightweight Proxmox Ubuntu LXC. Route traffic securely through Cloudflare Tunnels with zero port forwarding.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">September 2026</span>
+              <a href="posts/nextcloud-proxmox-cloudflare-tunnel-setup.html" id="readPostBtn-nextcloud-proxmox" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 16: Uptime Kuma Dashboard -->
+        <article class="card" data-category="proxmox">
+          <div class="card-image-wrapper">
+            <a href="posts/uptime-kuma-server-monitoring-setup.html">
+              <picture>
+                <source srcset="images/Stop Guessing When Servers Crash Uptime Kuma Dashboard Setup.webp" type="image/webp">
+                <img class="card-image" src="images/Stop Guessing When Servers Crash Uptime Kuma Dashboard Setup.jpg" alt="Uptime Kuma Server Monitoring Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: #10b981;">Monitoring</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/uptime-kuma-server-monitoring-setup.html">Stop Guessing When Servers Crash: Uptime Kuma Setup</a></h3>
+            <p class="card-excerpt">
+              Build a real-time monitoring dashboard with Uptime Kuma on Ubuntu with Node.js and PM2. Track ping, HTTP status, and get instant crash alerts.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">September 2026</span>
+              <a href="posts/uptime-kuma-server-monitoring-setup.html" id="readPostBtn-uptime-kuma" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 15: Infrastructure as Code (Terraform) -->
+        <article class="card" data-category="proxmox">
+          <div class="card-image-wrapper">
+            <a href="posts/infrastructure-as-code-terraform-homelab.html">
+              <picture>
+                <source srcset="images/Infrastructure as Code Explained in under 10 Minutes (Home Lab Guide).webp" type="image/webp">
+                <img class="card-image" src="images/Infrastructure as Code Explained in under 10 Minutes (Home Lab Guide).jpg" alt="Infrastructure as Code Terraform Guide Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: #f59e0b;">DevOps</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/infrastructure-as-code-terraform-homelab.html">Infrastructure as Code Explained in Under 10 Minutes</a></h3>
+            <p class="card-excerpt">
+              Stop relying on manual ClickOps in Proxmox. Learn how Terraform lets you define, version, and rebuild your home lab using plain text files.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">September 2026</span>
+              <a href="posts/infrastructure-as-code-terraform-homelab.html" id="readPostBtn-iac-terraform" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 14: Gotify Self-Hosted Alerts -->
+        <article class="card" data-category="docker">
+          <div class="card-image-wrapper">
+            <a href="posts/gotify-self-hosted-push-notifications.html">
+              <picture>
+                <source srcset="images/Stop Relying on Paid Alerts Deploy Gotify for Instant Phone Notifications.webp" type="image/webp">
+                <img class="card-image" src="images/Stop Relying on Paid Alerts Deploy Gotify for Instant Phone Notifications.jpg" alt="Gotify Self-Hosted Push Notifications Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-cyan);">Alerting</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/gotify-self-hosted-push-notifications.html">Stop Relying on Paid Alerts: Deploy Gotify for Phone Notifications</a></h3>
+            <p class="card-excerpt">
+              Ditch subscription push services. Deploy Gotify using Docker Compose and send instant phone notifications from Proxmox, shell scripts, and servers.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">September 2026</span>
+              <a href="posts/gotify-self-hosted-push-notifications.html" id="readPostBtn-gotify-alerts" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 13: Obsidian in Web Browser -->
+        <article class="card" data-category="obsidian docker">
+          <div class="card-image-wrapper">
+            <a href="posts/obsidian-in-web-browser-docker.html">
+              <picture>
+                <source srcset="images/obsidian-in-web-browser.webp" type="image/webp">
+                <img class="card-image" src="images/obsidian-in-web-browser.png" alt="Obsidian in Web Browser Docker Guide Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-purple);">Self-Hosted</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/obsidian-in-web-browser-docker.html">How to Use Obsidian in ANY Web Browser (2026 Guide)</a></h3>
+            <p class="card-excerpt">
+              Access your full desktop Obsidian interface, including custom themes, plugins, and graph view, directly inside any browser using Docker.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">August 2026</span>
+              <a href="posts/obsidian-in-web-browser-docker.html" id="readPostBtn-obsidian-in-web-browser" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 12: Cloudflare Zero Trust Tunnel -->
+        <article class="card" data-category="networking proxmox">
+          <div class="card-image-wrapper">
+            <a href="posts/cloudflare-zero-trust-tunnel-guide.html">
+              <picture>
+                <source srcset="images/cloudflare-zero-trust-tunnel.webp" type="image/webp">
+                <img class="card-image" src="images/cloudflare-zero-trust-tunnel.png" alt="Cloudflare Zero Trust Tunnel Guide Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: #10b981;">Network Security</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/cloudflare-zero-trust-tunnel-guide.html">Setting Up Your First Cloudflare Zero Trust Tunnel</a></h3>
+            <p class="card-excerpt">
+              Stop exposing open router ports to internet scanners. Learn how Cloudflare Tunnels create secure, outbound-only remote access to your homelab.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">August 2026</span>
+              <a href="posts/cloudflare-zero-trust-tunnel-guide.html" id="readPostBtn-cloudflare-zero-trust-tunnel" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 11: 3 MORE Obsidian Plugins -->
+        <article class="card" data-category="obsidian">
+          <div class="card-image-wrapper">
+            <a href="posts/3-more-obsidian-plugins-2026.html">
+              <picture>
+                <source srcset="images/3-more-obsidian-plugins-2026.webp" type="image/webp">
+                <img class="card-image" src="images/3-more-obsidian-plugins-2026.png" alt="3 MORE Obsidian Plugins 2026 Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-cyan);">Obsidian Plugins</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/3-more-obsidian-plugins-2026.html">3 MORE Obsidian Plugins I Use in 2026</a></h3>
+            <p class="card-excerpt">
+              Take Obsidian beyond basic text with Excalidraw infinite canvas sketching, frictionless Easy Typing corrections, and a rich-text Editing Toolbar.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">July 2026</span>
+              <a href="posts/3-more-obsidian-plugins-2026.html" id="readPostBtn-3-more-obsidian-plugins-2026" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 10: Budget Proxmox Cluster -->
+        <article class="card" data-category="proxmox">
+          <div class="card-image-wrapper">
+            <a href="posts/budget-proxmox-home-lab-setup.html">
+              <picture>
+                <source srcset="images/budget-proxmox-home-lab.webp" type="image/webp">
+                <img class="card-image" src="images/budget-proxmox-home-lab.png" alt="Budget Proxmox Cluster Tour Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: #10b981;">Home Lab</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/budget-proxmox-home-lab-setup.html">The Complete Budget Proxmox Home Lab Tour</a></h3>
+            <p class="card-excerpt">
+              Full architecture tour of a minimalist 3-node Proxmox cluster built from cheap Dell OptiPlex desktops with Ceph, VLAN highways, and PBS snapshots.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">July 2026</span>
+              <a href="posts/budget-proxmox-home-lab-setup.html" id="readPostBtn-budget-proxmox-home-lab" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 9: Alexandrie Hub -->
+        <article class="card" data-category="docker">
+          <div class="card-image-wrapper">
+            <a href="posts/alexandrie-hub-self-hosted-notes.html">
+              <picture>
+                <source srcset="images/alexandrie-hub-review.webp" type="image/webp">
+                <img class="card-image" src="images/alexandrie-hub-review.jpg" alt="Alexandrie Hub Review Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-purple);">Self-Hosted</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/alexandrie-hub-self-hosted-notes.html">Alexandrie Hub: A Gorgeous Self-Hosted Knowledge Base</a></h3>
+            <p class="card-excerpt">
+              Looking for a clean, web-first Markdown knowledge base? Explore Alexandrie Hub's live editor, interactive graph view, and easy Docker deployment.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">July 2026</span>
+              <a href="posts/alexandrie-hub-self-hosted-notes.html" id="readPostBtn-alexandrie-hub-self-hosted" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 8: Docker vs Podman -->
+        <article class="card" data-category="docker">
+          <div class="card-image-wrapper">
+            <a href="posts/docker-vs-podman.html">
+              <picture>
+                <source srcset="images/docker-vs-podman.webp" type="image/webp">
+                <img class="card-image" src="images/docker-vs-podman.png" alt="Docker vs Podman Post Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: #10b981;">Home Lab</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/docker-vs-podman.html">Docker vs. Podman: Which is Better for Your Home Lab?</a></h3>
+            <p class="card-excerpt">
+              Are you still running everything in Docker, or is it time to upgrade to Podman? Learn the critical security, rootless container, and daemon differences.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">June 2026</span>
+              <a href="posts/docker-vs-podman.html" id="readPostBtn-docker-vs-podman" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tutorial 7: Pi-hole & YouTube Ads -->
+        <article class="card" data-category="networking">
+          <div class="card-image-wrapper">
+            <a href="posts/pihole-youtube-ads-truth.html">
+              <picture>
+                <source srcset="images/The%20Honest%20Truth%20About%20Pi-hole%20%26%20YouTube%20Ads.webp" type="image/webp">
+                <img class="card-image" src="images/The%20Honest%20Truth%20About%20Pi-hole%20%26%20YouTube%20Ads.png" alt="Pi-hole YouTube Ads Tutorial Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: #10b981;">Home Lab</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/pihole-youtube-ads-truth.html">The Honest Truth About Pi-hole & YouTube Ads</a></h3>
+            <p class="card-excerpt">
+              Stop wasting time trying to force Pi-hole to block YouTube ads. Here is why it fails, and the 3 best workarounds for PC, Smart TVs, and mobile.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">June 2026</span>
+              <a href="posts/pihole-youtube-ads-truth.html" id="readPostBtn-pihole-youtube-ads-truth" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tutorial 6: Pi-hole Smart Blocking & Custom Lists -->
+        <article class="card" data-category="networking">
+          <div class="card-image-wrapper">
+            <a href="posts/pihole-smart-blocking-custom-lists.html">
+              <picture>
+                <source srcset="images/Pi-hole%20Smart%20Blocking%20%26%20Custom%20Lists.webp" type="image/webp">
+                <img class="card-image" src="images/Pi-hole%20Smart%20Blocking%20%26%20Custom%20Lists.png" alt="Pi-hole Smart Blocking Tutorial Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: #10b981;">Home Lab</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/pihole-smart-blocking-custom-lists.html">Pi-hole Smart Blocking & Custom Lists</a></h3>
+            <p class="card-excerpt">
+              Customize your Pi-hole blocking rules with Group Management and expand your network protection with community blocklists.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">June 2026</span>
+              <a href="posts/pihole-smart-blocking-custom-lists.html" id="readPostBtn-pihole-smart-blocking-custom-lists" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tutorial 5: Pi-hole Deployment -->
+        <article class="card" data-category="networking proxmox">
+          <div class="card-image-wrapper">
+            <a href="posts/pihole-installation-guide.html">
+              <picture>
+                <source srcset="images/Stop%20Network%20Ads%20Deploy%20Pi-hole.webp" type="image/webp">
+                <img class="card-image" src="images/Stop%20Network%20Ads%20Deploy%20Pi-hole.png" alt="Pi-hole Tutorial Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: #10b981;">Home Lab</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/pihole-installation-guide.html">Stop Network Ads: Deploy Pi-hole on Proxmox LXC</a></h3>
+            <p class="card-excerpt">
+              Deploy Pi-hole inside a lightweight Linux Container on Proxmox to block ads network-wide before they hit your devices.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">June 2026</span>
+              <a href="posts/pihole-installation-guide.html" id="readPostBtn-pihole-installation-guide" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tutorial 4: Obsidian Settings -->
+        <article class="card" data-category="obsidian">
+          <div class="card-image-wrapper">
+            <a href="posts/3-obsidian-settings-you-must-change.html">
+              <picture>
+                <source srcset="images/3%20Settings%20You%20MUST%20Change%20in%20Obsidian%20(Before%20It's%20Too%20Late).webp" type="image/webp">
+                <img class="card-image" src="images/3%20Settings%20You%20MUST%20Change%20in%20Obsidian%20(Before%20It's%20Too%20Late).png" alt="Obsidian Settings Tutorial Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-cyan);">Obsidian Setup</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/3-obsidian-settings-you-must-change.html">3 Settings You MUST Change in Obsidian</a></h3>
+            <p class="card-excerpt">
+              Three essential settings you need to change immediately to make Obsidian behave like a normal, friendly note-taking app.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">June 2026</span>
+              <a href="posts/3-obsidian-settings-you-must-change.html" id="readPostBtn-3-obsidian-settings-you-must-change" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tutorial 3: Obsidian Plugins -->
+        <article class="card" data-category="obsidian">
+          <div class="card-image-wrapper">
+            <a href="posts/obsidian-plugins-i-use-2026.html">
+              <picture>
+                <source srcset="images/Obsidian%20Plugins%20I%20Use%202026.webp" type="image/webp">
+                <img class="card-image" src="images/Obsidian%20Plugins%20I%20Use%202026.png" alt="Obsidian Plugins Tutorial Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-cyan);">Obsidian Plugins</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/obsidian-plugins-i-use-2026.html">3 Obsidian Plugins I Use in 2026</a></h3>
+            <p class="card-excerpt">
+              Transform Obsidian from a basic notepad into a fully automated, visual project management system using Kanban, Dataview, and Templater.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">June 2026</span>
+              <a href="posts/obsidian-plugins-i-use-2026.html" id="readPostBtn-obsidian-plugins-i-use-2026" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tutorial 2: Second Brain Setup -->
+        <article class="card" data-category="obsidian">
+          <div class="card-image-wrapper">
+            <a href="posts/obsidian-second-brain-setup.html">
+              <picture>
+                <source srcset="images/Obsidian%20Second%20Brain%20Setup.webp" type="image/webp">
+                <img class="card-image" src="images/Obsidian%20Second%20Brain%20Setup.png" alt="Obsidian Second Brain Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-purple);">Obsidian Workflow</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/obsidian-second-brain-setup.html">My Obsidian Second Brain Setup in 2026</a></h3>
+            <p class="card-excerpt">
+              Build a fully functional personal knowledge management system. Learn to utilize daily logs, track project milestones, and automate notes index databases.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">May 2026</span>
+              <a href="posts/obsidian-second-brain-setup.html" id="readPostBtn-obsidian-second-brain-setup" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tutorial 1: Starter Vault Setup -->
+        <article class="card" data-category="obsidian">
+          <div class="card-image-wrapper">
+            <a href="posts/obsidian-starter-vault-tutorial.html">
+              <picture>
+                <source srcset="images/Obsidian%20for%20Absolute%20Beginners%20(2026%20Guide).webp" type="image/webp">
+                <img class="card-image" src="images/Obsidian%20for%20Absolute%20Beginners%20(2026%20Guide).png" alt="Obsidian Starter Vault Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-cyan);">Obsidian Setup</span>
+              <span>•</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Available</span>
+            </div>
+            <h3 class="card-title"><a href="posts/obsidian-starter-vault-tutorial.html">Obsidian Starter Vault: Complete Setup Guide</a></h3>
+            <p class="card-excerpt">
+              Learn how to organize your vault using the flat 4-folder structure, configure templates, and apply styling snippets to create a premium, clean workspace.
+            </p>
+            <div class="card-footer"
+              style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span class="card-date">May 2026</span>
+              <a href="posts/obsidian-starter-vault-tutorial.html" id="readPostBtn-obsidian-starter-vault-tutorial" class="btn btn-outline btn-sm">Read Post</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div>
+        <a href="index.html" class="footer-logo">
+          Tech Simpld<span class="logo-dot"></span>
+        </a>
+        <p class="footer-desc">
+          Software and productivity, simplified. Clean, no-fluff tutorials and templates for digital creators and
+          builders.
+        </p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="posts.html">Posts</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="tools.html">Tools</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="https://youtube.com/@TechSimpld" target="_blank">YouTube Channel</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact & Legal</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:techsimpld@gmail.com">techsimpld@gmail.com</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-service.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Tech Simpld. All rights reserved. Built for lightning-fast speeds.</div>
+      <div class="footer-socials">
+        <a href="https://youtube.com/@TechSimpld" class="social-link" aria-label="YouTube">YouTube</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KFGHVDB66"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-1KFGHVDB66');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5214277715351322"
+    crossorigin="anonymous"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stop Network Ads: Deploy Pi-hole on Proxmox LXC | Tech Simpld</title>
+  <meta name="description"
+    content="Deploy Pi-hole inside a lightweight Linux Container (LXC) on Proxmox VE. Block ads network-wide, improve page load speeds, and secure your home lab.">
+  <link rel="canonical" href="https://techsimpld.com/posts/pihole-installation-guide.html">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / SEO -->
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Tech Simpld">
+  <meta property="og:url" content="https://techsimpld.com/posts/pihole-installation-guide.html">
+  <meta property="og:title" content="Stop Network Ads: Deploy Pi-hole on Proxmox LXC | Tech Simpld">
+  <meta property="og:description"
+    content="Deploy Pi-hole inside a lightweight Linux Container (LXC) on Proxmox VE. Block ads network-wide, improve page load speeds, and secure your home lab.">
+  <meta property="og:image" content="https://techsimpld.com/images/Stop%20Network%20Ads%20Deploy%20Pi-hole.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stop Network Ads: Deploy Pi-hole on Proxmox LXC | Tech Simpld">
+  <meta name="twitter:description"
+    content="Deploy Pi-hole inside a lightweight Linux Container (LXC) on Proxmox VE. Block ads network-wide, improve page load speeds, and secure your home lab.">
+  <meta name="twitter:image" content="https://techsimpld.com/images/Stop%20Network%20Ads%20Deploy%20Pi-hole.png">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Stop Network Ads: Deploy Pi-hole on Proxmox LXC",
+    "image": [
+      "https://techsimpld.com/images/Stop%20Network%20Ads%20Deploy%20Pi-hole.png",
+      "https://techsimpld.com/images/pihole-install-step-1.png",
+      "https://techsimpld.com/images/pihole-install-step-2.png",
+      "https://techsimpld.com/images/pihole-install-step-3.png"
+    ],
+    "datePublished": "2026-06-12T08:00:00+08:00",
+    "dateModified": "2026-11-02T10:00:00-05:00",
+    "author": {
+      "@type": "Person",
+      "name": "Tech Simpld",
+      "url": "https://techsimpld.com/about.html",
+      "jobTitle": "MCSA Certified Systems Engineer",
+      "sameAs": ["https://youtube.com/@TechSimpld"]
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Tech Simpld",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://techsimpld.com/images/obsidian-vault.png"
+      }
+    },
+    "description": "Deploy Pi-hole inside a lightweight Linux Container on Proxmox to block ads network-wide."
+  }
+  </script>
+
+  <!-- DNS Prefetch & Preconnect for Speed -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="alternate icon" type="image/png" href="../favicon.png">
+
+    <!-- Google Fonts Preconnect & Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo-link">
+        Tech Simpld<span class="logo-dot"></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li><a href="../about.html" class="nav-link">About</a></li>
+        <li><a href="../posts.html" class="nav-link active">Posts</a></li>
+        <li><a href="../resources.html" class="nav-link">Resources</a></li>
+        <li><a href="../tools.html" class="nav-link">Tools</a></li>
+        <li><a href="../contact.html" class="nav-link">Contact</a></li>
+        <li><a href="https://youtube.com/@TechSimpld" target="_blank" class="nav-link">YouTube</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://youtube.com/@TechSimpld" target="_blank" class="btn btn-primary btn-sm" id="subscribeHeaderBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+          Subscribe
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="main-layout">
+
+    <!-- 2-Column Blog Layout -->
+    <div class="blog-container">
+
+      <!-- Main Article Column -->
+      <article class="blog-main">
+
+        <header class="article-header">
+          <div class="badge">Proxmox Tutorial</div>
+          <h1 class="article-title">Stop Network Ads: Deploy Pi-hole on Proxmox LXC</h1>
+
+          <div class="article-meta">
+            <div class="article-meta-item">
+              <div class="author-avatar">TS</div>
+              <span>By <strong>Tech Simpld</strong></span>
+            </div>
+            <span>•</span>
+            <div class="article-meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span>June 12, 2026</span>
+            </div>
+            <span>•</span>
+            <div class="article-meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span>5 Min Read</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Video Player Container (Mock YouTube Iframe Embed) -->
+        <div class="video-container">
+          <!-- Placeholder YouTube Iframe. Replace URL src when active. -->
+          <iframe src="https://www.youtube-nocookie.com/embed/-sNOsGYcrac" title="Tech Simpld YouTube Tutorial Player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <!-- Article Content -->
+        <div class="prose">
+          <figure class="article-featured-figure">
+            <picture>
+              <source srcset="../images/Stop%20Network%20Ads%20Deploy%20Pi-hole.webp" type="image/webp">
+              <img src="../images/Stop%20Network%20Ads%20Deploy%20Pi-hole.png" alt="Pi-hole Network-Wide DNS Ad Blocker Deployment on Proxmox LXC and Docker" width="1200" height="675" loading="eager" decoding="async">
+            </picture>
+            <figcaption class="article-featured-caption">Deploying Pi-hole as a network-wide DNS sinkhole in a lightweight Proxmox VE Linux Container.</figcaption>
+          </figure>
+          <p>
+            Let's be completely blunt about the state of things today: the modern internet is actively hostile to the user. It is no longer just a few annoying banner ads on the side of a webpage. It is massive, auto-playing video players, screen-covering popups that demand your email address, and invisible tracking pixels that silently follow you across the web to build an advertising profile. All of this garbage bloats websites, chokes your network bandwidth, dramatically slows down page load times, and turns basic browsing into a completely miserable, frustrating experience.
+          </p>
+          <p>
+            If you are strictly browsing on a desktop PC, a great browser extension like uBlock Origin handles most of this beautifully. But what about everything else? What about your expensive smart TV that injects ads into the menu? What about your phone when you are using mobile apps instead of a browser? What about your various IoT devices? You cannot install browser extensions on a smart refrigerator or an Apple TV. You need a solution that protects the entire house at once, not just a single web browser.
+          </p>
+          <p>
+            That is exactly why I deployed <strong>Pi-hole</strong> on my home network. Pi-hole is a network-wide ad blocker. Instead of fighting advertisements device-by-device, Pi-hole sits quietly at the absolute edge of your network and acts as a massive black hole for telemetry, tracking, and advertisements. It operates by intercepting requests at the DNS (Domain Name System) level, stopping the connection before the ads can even begin to download.
+          </p>
+          <p>
+            Most people buy a physical Raspberry Pi micro-computer for this exact purpose (hence the name). But since I already have an incredibly powerful Proxmox VE server running 24/7 in my home lab, buying extra, overpriced hardware is a complete waste of money. In this comprehensive guide, I am going to show you exactly how I deployed Pi-hole inside a highly efficient, lightweight Linux Container (LXC) on Proxmox to secure my entire home network.
+          </p>
+
+          <h2>Why Choose an LXC over a Full Virtual Machine?</h2>
+          <p>
+            If you are relatively new to the Proxmox ecosystem, your immediate instinct might be to spin up a full Virtual Machine (VM) running Ubuntu or Debian just to host Pi-hole. Please do not do this. A full VM simulates entire hardware layers, including a virtual motherboard, BIOS, and virtual disks. It is incredibly heavy and resource-intensive for what we need to accomplish.
+          </p>
+          <p>
+            An LXC (Linux Container), on the other hand, runs directly on the host's kernel without that massive overhead. Because Pi-hole is essentially just a highly optimized, text-based phonebook for IP addresses, it needs almost zero processing power to run efficiently. My Pi-hole LXC container boots instantly in under three seconds and consistently consumes less than 512MB of RAM, leaving the rest of my expensive server hardware completely free for much heavier workloads like media streaming and database management.
+          </p>
+
+          <figure class="article-featured-figure">
+            <picture>
+              <source srcset="../images/pihole-install-step-1.webp" type="image/webp">
+              <img src="../images/pihole-install-step-1.png" alt="Proxmox VE summary dashboard for Container 107 (pihole) running Ubuntu with 76.39 MiB RAM usage and static IP 192.168.100.100" width="1280" height="640" loading="lazy" decoding="async">
+            </picture>
+            <figcaption class="article-featured-caption">Pi-hole running inside an unprivileged Proxmox VE LXC container (CT 107) consuming only 76.39 MiB of RAM at 192.168.100.100.</figcaption>
+          </figure>
+
+          <h2>Step 1: Accessing the Proxmox Shell</h2>
+          <p>
+            Building Linux containers entirely manually, downloading specific OS templates, manually configuring virtual network bridges, creating administrative users, and updating packages, is tedious and prone to human error. I don't do it, and neither should you. Instead, I heavily utilize the community-built Proxmox VE Helper Scripts to completely automate the grunt work and deploy services flawlessly in seconds.
+          </p>
+          <ul>
+            <li>Log into your <strong>Proxmox web administrative interface</strong> via your browser.</li>
+            <li>Select your main server node on the left-hand navigation tree (this is usually named something like <code>pve</code> or <code>proxmox-01</code>).</li>
+            <li>Click the <strong>Shell</strong> button located in the top right corner (or in the main central panel). This drops you directly into the server's root terminal, giving you full command-line access.</li>
+          </ul>
+
+          <h2>Step 2: Executing the Helper Deployment Script</h2>
+          <p>
+            We are going to be using the highly trusted and widely recommended Pi-hole deployment script created by the developer <em>tteck</em>. This script has been audited by the community and is entirely safe. Paste this exact command directly into your Proxmox shell and confidently hit Enter:
+          </p>
+          <pre><code class="language-bash">bash -c "$(wget -qLO - https://github.com/tteck/Proxmox/raw/main/ct/pihole.sh)"</code></pre>
+          <p>
+            An interactive, text-based wizard will immediately prompt you. Answer "Yes" to confirm you want to create the LXC, and answer "Yes" to use the Default Settings (allocating 1 CPU Core and 512MB RAM is absolutely perfect for a home network). The script will take over completely. It will automatically download the lightweight Debian OS template, build the container architecture, assign resources, and fully install the Pi-hole software framework. This entire process usually finishes in under a minute.
+          </p>
+
+          <h2>Step 3: Pi-hole Core Configuration</h2>
+          <p>
+            During the automated installation process, a series of blue, retro-looking Pi-hole configuration screens will appear in your terminal. Pay close attention to these steps:
+          </p>
+          <ul>
+            <li><strong>Upstream DNS Provider:</strong> This is the "real" internet phonebook that Pi-hole queries when a legitimate, non-ad request is made (like loading a normal website). I personally use Cloudflare (1.1.1.1) because it is incredibly fast and respects privacy, but Google (8.8.8.8) or Quad9 (9.9.9.9) work perfectly fine as well.</li>
+            <li><strong>Third-Party Blocklists:</strong> The installer will ask if you want to use the default StevenBlack blocklist. Accept this default. It is meticulously maintained and actively blocks millions of known advertising trackers right out of the box without breaking the internet.</li>
+            <li><strong>Setting a Static IP Address:</strong> <em>This is the most crucial step of the entire tutorial.</em> You absolutely must set a static, unchanging IP address for this container. If you let it use DHCP, your router might assign it a new IP address next week. If your Pi-hole's IP changes, your entire house instantly loses internet access because devices will be pointing to a dead address. Confirm the suggested static IP and write it down.</li>
+          </ul>
+
+          <h2>Step 4: Save Your Administrative Credentials</h2>
+          <p>
+            When the deployment script completely finishes its run, the terminal will output a final summary screen. It will display your Pi-hole's IP address and, most importantly, a randomly generated <strong>Admin Password</strong>. Write this password down immediately or copy it to a secure password manager. You will absolutely need it to log into the web dashboard to monitor your network.
+          </p>
+
+          <figure class="article-featured-figure">
+            <picture>
+              <source srcset="../images/pihole-install-step-2.webp" type="image/webp">
+              <img src="../images/pihole-install-step-2.png" alt="Pi-hole text installer Installation Complete dialog displaying static IPv4 address 192.168.100.100 and admin web interface password" width="1280" height="640" loading="lazy" decoding="async">
+            </picture>
+            <figcaption class="article-featured-caption">Pi-hole terminal installer completion screen showing the static IPv4 address (192.168.100.100) and generated web dashboard password.</figcaption>
+          </figure>
+
+          <h2>Step 5: Rerouting Your Entire Network Traffic</h2>
+          <p>
+            At this point, your Pi-hole is fully running, active, and ready to block ads. However, it is completely invisible to your network. Your devices don't know it exists yet. You must manually force your main home router to use Pi-hole as the brain of the network.
+          </p>
+          <ul>
+            <li>Log into your main router's admin panel (this is typically found at an IP like <code>192.168.1.1</code> or <code>10.0.0.1</code>).</li>
+            <li>Dig through the settings to locate the <strong>DHCP / LAN Configuration</strong> section.</li>
+            <li>Change the <strong>Primary DNS Server</strong> address to perfectly match your new Pi-hole's static IP address.</li>
+            <li><strong>CRITICAL:</strong> Leave the <strong>Secondary DNS</strong> completely empty. Do not put Google or Cloudflare here as a "backup." If you provide a secondary DNS, devices like smartphones and smart TVs are notoriously lazy; they will frequently bypass the Pi-hole entirely, use the secondary DNS, and you will still see ads everywhere.</li>
+            <li>Save your settings and physically reboot your router to force all devices in the house to grab the new configuration.</li>
+          </ul>
+
+          <figure class="article-featured-figure">
+            <picture>
+              <source srcset="../images/pihole-install-step-3.webp" type="image/webp">
+              <img src="../images/pihole-install-step-3.png" alt="Ad-heavy recipe website loaded in Mozilla Firefox with banner and pop-up ad slots stripped clean by Pi-hole DNS sinkholing" width="1280" height="640" loading="lazy" decoding="async">
+            </picture>
+            <figcaption class="article-featured-caption">Testing a recipe website on a client machine after routing network DNS through Pi-hole, with third-party banner and video ad slots stripped clean.</figcaption>
+          </figure>
+
+          <h2>Troubleshooting & Common Pitfalls</h2>
+          <p>
+            Deploying network-level software can be intimidating. Here are the issues I see people hit constantly, and how to fix them:
+          </p>
+          <ul>
+            <li><strong>Help, my entire house lost internet access!</strong> Do not panic. You likely set a secondary DNS on your router that conflicted, or the Pi-hole container itself is turned off in Proxmox. Log back into your router via its IP, change the DNS settings back to "Automatic" or your ISP default to restore internet, and then take your time troubleshooting the container.</li>
+            <li><strong>I deployed Pi-hole, but I'm still seeing YouTube ads. Why?</strong> Pi-hole operates strictly at the DNS (domain) level. YouTube serves its video ads from the exact same domain server as the actual video itself (usually a variation of <code>googlevideo.com</code>). Because they are entangled, if Pi-hole blocks the ad, the entire video breaks. DNS blocking cannot distinguish between the two. You will still need a browser extension like uBlock Origin on your PC specifically for YouTube.</li>
+            <li><strong>A legitimate website, app, or streaming service won't load properly.</strong> Sometimes the default blocklist is slightly too aggressive. Log into your Pi-hole web dashboard (at <code>http://your-pihole-ip/admin</code>), click on the Query Log, watch the red blocked requests as you try to load the broken site, and click the "Whitelist" button next to the blocked domain to allow it through permanently.</li>
+          </ul>
+
+          <h2>Conclusion & Next Steps for Your Lab</h2>
+          <p>
+            Congratulations, your entire home network is now heavily defended. Every single device connected to your Wi-Fi, from your laptop to your smart thermostat, is actively being stripped of malicious telemetry and massive ad payloads before they even reach the screen. It is easily one of the highest Return-on-Investment (ROI) projects you can ever run in a home lab environment. Monitor your dashboard, tweak your whitelists as necessary, and enjoy a significantly faster, cleaner, and more secure internet experience.
+          </p>
+
+          <h2>Official Resources & External Links</h2>
+          <p>
+            For further reading, advanced configurations, and alternative deployment scripts, reference these official sources:
+          </p>
+          <ul>
+            <li><a href="https://pi-hole.net/" target="_blank" rel="noopener noreferrer">Pi-hole Official Website & Community Forum</a></li>
+            <li><a href="https://docs.pi-hole.net/" target="_blank" rel="noopener noreferrer">Pi-hole Official Technical Documentation</a></li>
+            <li><a href="https://tteck.github.io/Proxmox/" target="_blank" rel="noopener noreferrer">Proxmox VE Helper Scripts Repository (tteck)</a></li>
+          </ul>
+        </div>
+
+
+
+        <div class="author-bio-box">
+          <div class="author-bio-avatar" aria-hidden="true">TS</div>
+          <div class="author-bio-content">
+            <h3>Written by Tech Simpld</h3>
+            <span class="author-bio-role">MCSA Certified Systems Engineer &bull; 20+ Years Enterprise IT</span>
+            <p>
+              Tech Simpld is maintained by a Systems Engineer managing virtual machines and enterprise storage architecture across five data centers. Every tutorial and configuration on this site is tested first-hand in our physical Proxmox VE home lab and daily Obsidian production vaults.
+            </p>
+            <div class="author-bio-links">
+              <a href="../about.html">Lab Architecture &amp; Mission &rarr;</a>
+              <a href="../tools.html">Interactive Home Lab Web Tools &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+      </article>
+
+      <!-- Sidebar Column -->
+      <aside class="blog-sidebar">
+
+        <!-- Widget: About Channel -->
+        <div class="sidebar-widget">
+          <h4 class="widget-title">About Tech Simpld</h4>
+          <p style="font-size: 0.9rem; margin-bottom: 1rem;">
+            Software and productivity, simplified. We build and share direct, step-by-step guides for freemium SaaS
+            tools.
+          </p>
+          <a href="https://youtube.com/@TechSimpld" target="_blank" id="sidebarYoutubeBtn" class="btn btn-outline btn-sm" style="width: 100%;">
+            Visit YouTube Channel
+          </a>
+        </div>
+
+
+
+
+        <div class="sidebar-widget">
+          <h4 class="widget-title">Related Tutorials</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; line-height: 1.8;">
+            <li><a href="pihole-smart-blocking-custom-lists.html" style="color: var(--accent-cyan);">Pi-hole Custom Gravity Lists</a></li>
+            <li><a href="adguard-home-1-0-beta-setup-guide.html" style="color: var(--text-primary);">AdGuard Home 1.0 LXC Setup</a></li>
+            <li><a href="pihole-youtube-ads-truth.html" style="color: var(--text-primary);">Pi-hole &amp; YouTube Ads Explained</a></li>
+            <li><a href="../tools.html" style="color: var(--accent-yellow, #facc15);">Interactive Home Lab Web Tools</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div>
+        <a href="../index.html" class="footer-logo">
+          Tech Simpld<span class="logo-dot"></span>
+        </a>
+        <p class="footer-desc">
+          Software and productivity, simplified. Clean, no-fluff tutorials and templates for digital creators and
+          builders.
+        </p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../posts.html">Posts</a></li>
+          <li><a href="../resources.html">Resources</a></li>
+          <li><a href="../tools.html">Tools</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+          <li><a href="https://youtube.com/@TechSimpld" target="_blank">YouTube Channel</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact & Legal</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:techsimpld@gmail.com">techsimpld@gmail.com</a></li>
+          <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="../terms-of-service.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Tech Simpld. All rights reserved. Built for lightning-fast speeds.</div>
+      <div class="footer-socials">
+        <a href="https://youtube.com/@TechSimpld" class="social-link" aria-label="YouTube">YouTube</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/scripts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-hcl.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+</body>
+
+</html>
+

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KFGHVDB66"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-1KFGHVDB66');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5214277715351322"
+    crossorigin="anonymous"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker vs. Podman: Which is Better for Your Home Lab? | Tech Simpld</title>
+  <meta name="description"
+    content="Compare Docker and Podman for your home lab setup. Learn the key differences in security, rootless containers, daemon dependency, and ease of use.">
+  <link rel="canonical" href="https://techsimpld.com/posts/docker-vs-podman.html">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / SEO -->
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Tech Simpld">
+  <meta property="og:url" content="https://techsimpld.com/posts/docker-vs-podman.html">
+  <meta property="og:title" content="Docker vs. Podman: Which is Better for Your Home Lab? | Tech Simpld">
+  <meta property="og:description"
+    content="Compare Docker and Podman for your home lab setup. Learn the key differences in security, rootless containers, daemon dependency, and ease of use.">
+  <meta property="og:image" content="https://techsimpld.com/images/docker-vs-podman.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Docker vs. Podman: Which is Better for Your Home Lab? | Tech Simpld">
+  <meta name="twitter:description"
+    content="Compare Docker and Podman for your home lab setup. Learn the key differences in security, rootless containers, daemon dependency, and ease of use.">
+  <meta name="twitter:image" content="https://techsimpld.com/images/docker-vs-podman.png">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Docker vs. Podman: Which is Better for Your Home Lab?",
+    "image": [
+      "https://techsimpld.com/images/docker-vs-podman.png",
+      "https://techsimpld.com/images/docker-vs-podman-step-1.png",
+      "https://techsimpld.com/images/docker-vs-podman-step-2.png",
+      "https://techsimpld.com/images/docker-vs-podman-step-3.png"
+    ],
+    "datePublished": "2026-06-25T08:00:00+08:00",
+    "dateModified": "2026-11-02T10:00:00-05:00",
+    "author": {
+      "@type": "Person",
+      "name": "Tech Simpld",
+      "url": "https://techsimpld.com/about.html",
+      "jobTitle": "MCSA Certified Systems Engineer",
+      "sameAs": ["https://youtube.com/@TechSimpld"]
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Tech Simpld",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://techsimpld.com/images/obsidian-vault.png"
+      }
+    },
+    "description": "Compare Docker and Podman for your home lab setup. Learn the key differences in security, rootless containers, daemon dependency, and ease of use."
+  }
+  </script>
+
+  <!-- DNS Prefetch & Preconnect for Speed -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="alternate icon" type="image/png" href="../favicon.png">
+
+    <!-- Google Fonts Preconnect & Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo-link">
+        Tech Simpld<span class="logo-dot"></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li><a href="../about.html" class="nav-link">About</a></li>
+        <li><a href="../posts.html" class="nav-link active">Posts</a></li>
+        <li><a href="../resources.html" class="nav-link">Resources</a></li>
+        <li><a href="../tools.html" class="nav-link">Tools</a></li>
+        <li><a href="../contact.html" class="nav-link">Contact</a></li>
+        <li><a href="https://youtube.com/@TechSimpld" target="_blank" class="nav-link">YouTube</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://youtube.com/@TechSimpld" target="_blank" class="btn btn-primary btn-sm" id="subscribeHeaderBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+          Subscribe
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="main-layout">
+
+    <!-- 2-Column Blog Layout -->
+    <div class="blog-container">
+
+      <!-- Main Article Column -->
+      <article class="blog-main">
+
+        <header class="article-header">
+          <div class="badge">Home Lab Setup</div>
+          <h1 class="article-title">Docker vs. Podman: Which is Better for Your Home Lab?</h1>
+
+          <div class="article-meta">
+            <div class="article-meta-item">
+              <div class="author-avatar">TS</div>
+              <span>By <strong>Tech Simpld</strong></span>
+            </div>
+            <span>•</span>
+            <div class="article-meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span>June 25, 2026</span>
+            </div>
+            <span>•</span>
+            <div class="article-meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span>8 Min Read</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Video Player Container (Mock YouTube Iframe Embed) -->
+        <div class="video-container">
+          <iframe src="https://www.youtube-nocookie.com/embed/mR3nz00sn8c" title="Docker vs. Podman Video Guide"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <!-- Article Content -->
+        <div class="prose">
+          <figure class="article-featured-figure">
+            <picture>
+              <source srcset="../images/docker-vs-podman.webp" type="image/webp">
+              <img src="../images/docker-vs-podman.png" alt="Docker Daemon vs Podman Rootless Container Architecture Comparison" width="1200" height="675" loading="eager" decoding="async">
+            </picture>
+            <figcaption class="article-featured-caption">Comparing Docker's root daemon architecture against Podman's daemonless, rootless container execution model.</figcaption>
+          </figure>
+          <p>
+            If you are in the early stages of building a home lab, diving into the world of containerization is arguably the single greatest technical skill you will ever learn. Long gone are the dark days of provisioning a full virtual machine just to run a lightweight web server, or installing complex software directly onto your host operating system and praying that conflicting Python dependencies don't suddenly crash your entire setup. Containers completely revolutionized this paradigm by allowing you to run isolated, neatly packaged applications, like Plex Media Server, Home Assistant, or Pi-hole, in clean, perfectly reproducible, disposable boxes.
+          </p>
+          <p>
+            For the better part of a decade, <strong>Docker</strong> has been the undisputed, heavyweight king of this containerized world. Almost every single Reddit guide, YouTube tutorial, and GitHub repository README assumes, by default, that you are using Docker. It has become a proprietary eponym, much like Kleenex or Xerox. But lately, a fierce competitor named <strong>Podman</strong> (developed and backed heavily by enterprise giant Red Hat) has been gaining serious, undeniable traction in the self-hosting and enterprise communities, promising significantly better security architectures and a lighter overall system footprint.
+          </p>
+          <p>
+            I have run both engines extensively on my bare-metal Proxmox servers over the last few years, pushing both to their absolute limits. In this comprehensive, deep-dive guide, I am going to break down the highly technical differences between the two engines, explain exactly what the buzzword "daemonless" actually means in practice, analyze the security implications of rootless containers, and ultimately tell you which engine you should actually use as the foundation for your home lab.
+          </p>
+
+          <h2>1. The Daemon Architecture: How They Actually Run Under the Hood</h2>
+          <p>
+            The fundamental, core architectural difference between Docker and Podman, and the source of almost all their other differences, lies in the concept of the <strong>Daemon</strong>.
+          </p>
+          <p>
+            Docker requires a centralized, heavy background manager process (specifically known as the daemon, or <code>dockerd</code>) running 24/7 on your host system with elevated privileges. When you open your terminal and execute a simple command like <code>docker run nginx</code>, your terminal client isn't actually doing the heavy lifting. It simply sends an API request over a local socket to that centralized manager, and the manager does the actual work of pulling the image, provisioning the network, and spawning the container. 
+          </p>
+          <p>
+            The major architectural problem with this design? It represents a massive single point of failure. If the Docker daemon crashes due to a memory leak, or if you simply need to restart the daemon to apply a minor security update, <strong>every single container on your entire server goes down with it instantly</strong>. Your DNS server, your reverse proxy, your media server, all dead until the daemon recovers.
+          </p>
+          <p>
+            Podman, on the other hand, was engineered from day one to be entirely <strong>daemonless</strong>. It does not rely on a centralized background manager. When you type <code>podman run nginx</code>, Podman launches that specific container directly as an independent, standalone child process of your user session. They operate exactly like normal Linux processes. If one Podman container crashes violently, or if you update the Podman CLI tool itself, it has absolutely zero impact on the rest of the containers running on your system. This localized fault tolerance is a massive architectural advantage for stability.
+          </p>
+
+          <figure class="article-featured-figure">
+            <picture>
+              <source srcset="../images/docker-vs-podman-step-1.webp" type="image/webp">
+              <img src="../images/docker-vs-podman-step-1.png" alt="Side-by-side comparison chart of Podman daemonless architecture and Docker daemon-based execution" width="1280" height="640" loading="lazy" decoding="async">
+            </picture>
+            <figcaption class="article-featured-caption">Comparing Podman's daemonless child-process model and native rootless isolation against Docker's centralized background daemon.</figcaption>
+          </figure>
+
+          <h2>2. The Security Paradigm: Root vs. Rootless Execution</h2>
+          <p>
+            When you decide to expose any of your self-hosted services to the public internet (via a reverse proxy or Cloudflare Tunnel), security is no longer just a buzzword; it becomes a critical necessity. 
+          </p>
+          <p>
+            By default, the Docker daemon runs entirely as <code>root</code> (meaning it holds full, unrestricted administrative privileges over your entire operating system). When you launch a container, that container process also generally inherits those elevated permissions on the host. If a malicious hacker manages to exploit a zero-day vulnerability in your exposed WordPress container and successfully breaks out of the containerized sandbox, they instantly have unrestricted root access to your entire physical server. They can wipe your hard drives, install ransomware, or pivot deeper into your home network. While Docker does technically offer a "rootless mode" now, getting it configured correctly with networking involves modifying system-wide UID/GID maps, dealing with dbus, and is generally a massive, frustrating headache for beginners.
+          </p>
+          <p>
+            Podman, conversely, was explicitly built from the ground up to prioritize <strong>rootless containers</strong>. You run, manage, and execute containers using your standard, highly restricted, unprivileged user account. Even inside the container, what appears to be the 'root' user is actually securely mapped to your unprivileged user on the host OS via user namespaces. If a container is severely compromised and the attacker breaks out, they are firmly trapped within your heavily restricted user permissions. They cannot access system files, install kernel modules, or destroy the host OS. This fundamental security-by-default posture is a massive win for Podman and is the primary reason Red Hat uses it in enterprise environments.
+          </p>
+
+          <figure class="article-featured-figure">
+            <picture>
+              <source srcset="../images/docker-vs-podman-step-2.webp" type="image/webp">
+              <img src="../images/docker-vs-podman-step-2.png" alt="Terminal output comparing Docker root daemon processes against Podman rootless UID namespace mapping" width="1280" height="640" loading="lazy" decoding="async">
+            </picture>
+            <figcaption class="article-featured-caption">Inspecting process ownership on the host: Docker's root-owned dockerd socket versus Podman's rootless user namespace mapping to UID 1000.</figcaption>
+          </figure>
+
+          <h2>3. Ease of Use and The Learning Curve</h2>
+          <p>
+            A common fear among beginners is that learning a new container engine means memorizing an entirely new set of commands. Fortunately, the developers of Podman fully anticipated this barrier to entry. If you already know Docker, you already know Podman. The developers deliberately engineered the Podman Command Line Interface (CLI) to be perfectly identical to Docker's CLI.
+          </p>
+          <p>
+            In fact, it is so identical that Red Hat officially recommends simply setting this exact alias in your <code>~/.bashrc</code> file on your servers:
+          </p>
+          <pre><code class="language-bash">alias docker=podman</code></pre>
+          <p>
+            Once you set that alias, muscle memory takes over. Standard commands like <code>docker run</code>, <code>docker ps -a</code>, <code>docker exec -it</code>, and <code>docker stop</code> work exactly the same under the hood when you swap in the word <code>podman</code>. It natively interfaces with standard OCI registries, meaning it pulls images from Docker Hub smoothly without any special configuration. There is essentially zero learning curve for executing basic lifecycle commands.
+          </p>
+
+          <h2>4. The Big Catch: Docker Compose vs. Kubernetes Pods</h2>
+          <p>
+            If Podman is more secure and doesn't rely on a fragile daemon, why isn't everyone using it? Here is the exact area where Docker still completely dominates for the casual home labber: <strong>Docker Compose</strong>. 
+          </p>
+          <p>
+            When you want to deploy a complex, multi-tiered application stack (for example, spinning up a Nextcloud web container, a MariaDB database container, and a Redis caching container all at once), Docker Compose allows you to beautifully define all of that infrastructure as code in a single, easily readable YAML file. You type <code>docker-compose up -d</code>, and the entire stack spins up with custom internal networking bridging them together. It is the absolute gold standard for home lab documentation, and almost every open-source project provides a ready-to-use <code>docker-compose.yml</code> file.
+          </p>
+          <p>
+            Podman, by its enterprise nature, does not natively use Docker Compose. Instead, it uses the concept of <strong>Pods</strong>, a structural concept directly borrowed from Kubernetes. A Pod is a group of one or more containers that share the exact same network namespace, IP address, and port mappings. While Podman does have a community-maintained Python wrapper called <code>podman-compose</code> designed to translate Docker Compose files into Podman commands, it can be slightly buggy, especially when dealing with highly complex internal networking rules or custom MacVLAN setups.
+          </p>
+          <p>
+            If you heavily rely on copying and pasting massive <code>docker-compose.yml</code> files from random internet tutorials and expect them to just magically work on the first try without tweaking, Docker remains vastly easier and more forgiving.
+          </p>
+
+          <h2>Troubleshooting & Common Transition Pitfalls</h2>
+          <p>
+            If you decide to take the plunge and migrate from Docker to Podman, you need to watch out for these specific edge cases:
+          </p>
+          <ul>
+            <li><strong>Port Binding Failures in Rootless Podman:</strong> By default Linux security design, unprivileged users (and therefore rootless Podman containers) cannot bind to "privileged ports" below port 1024 (this includes essential ports like 80 for HTTP or 443 for HTTPS). If you try to run a reverse proxy like Nginx or Traefik rootless and bind it to port 443, it will immediately throw a permission denied error and fail. To fix this, you must permanently configure your host OS (via <code>sysctl</code>) to lower the <code>net.ipv4.ip_unprivileged_port_start</code> value to 80.</li>
+            <li><strong>Docker Compose Syntax Errors:</strong> While <code>podman-compose</code> is generally excellent and works for 90% of basic homelab setups, specific Docker network configurations, particularly those declaring static IP addresses or complex custom bridge networks, often fail to translate perfectly and require manual syntax tweaking to work correctly in the Podman environment.</li>
+            <li><strong>Restarting Containers on Boot:</strong> Because Docker has a daemon that starts on boot, it automatically restarts your containers marked with <code>restart: always</code>. Podman has no daemon. To make rootless Podman containers start on boot, you actually have to generate Systemd service files for each container using <code>podman generate systemd</code>, which is a fundamentally different (though arguably more reliable) workflow.</li>
+          </ul>
+
+          <figure class="article-featured-figure">
+            <picture>
+              <source srcset="../images/docker-vs-podman-step-3.webp" type="image/webp">
+              <img src="../images/docker-vs-podman-step-3.png" alt="Linux terminal commands for Podman CLI aliasing, unprivileged port sysctl tuning, and systemd service generation" width="1280" height="640" loading="lazy" decoding="async">
+            </picture>
+            <figcaption class="article-featured-caption">Essential migration commands: aliasing the Podman CLI, lowering unprivileged port boundaries via sysctl, and generating user-level systemd units.</figcaption>
+          </figure>
+
+          <h2>Conclusion & Final Recommendations</h2>
+          <p>
+            So, returning to the core question: which engine should you actually install on your fresh home lab server tonight?
+          </p>
+          <p>
+            <strong>You should absolutely use Docker if:</strong> You are a complete beginner just dipping your toes into self-hosting. The community support is unimaginably massive, GUI management tools like Portainer work flawlessly right out of the box, and you can copy-paste complex Compose files from GitHub without having to deeply understand Linux networking or user namespaces. It is the path of least resistance.
+          </p>
+          <p>
+            <strong>You should strongly consider using Podman if:</strong> You care deeply about system security, you specifically want to run containers rootless without fighting the host configuration, or you have long-term plans to transition your skills into enterprise Kubernetes (since Podman pods can be directly exported as Kubernetes YAML manifests).
+          </p>
+          <p>
+            Personally? I employ a hybrid approach. I run Docker heavily for my quick, dirty internal services that only live on my secure LAN, and I strictly enforce Podman for any container (like my reverse proxy, Nextcloud, or Bitwarden) that is exposed to the hostile public internet. Use the right tool for the specific risk profile.
+          </p>
+
+          <h2>Official Resources for Deep Dives</h2>
+          <ul>
+            <li><a href="https://podman.io/" target="_blank" rel="noopener noreferrer">The Official Podman Documentation & Architecture Guides</a></li>
+            <li><a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">The Official Docker Documentation</a></li>
+          </ul>
+        </div>
+
+        <div class="author-bio-box">
+          <div class="author-bio-avatar" aria-hidden="true">TS</div>
+          <div class="author-bio-content">
+            <h3>Written by Tech Simpld</h3>
+            <span class="author-bio-role">MCSA Certified Systems Engineer &bull; 20+ Years Enterprise IT</span>
+            <p>
+              Tech Simpld is maintained by a Systems Engineer managing virtual machines and enterprise storage architecture across five data centers. Every tutorial and configuration on this site is tested first-hand in our physical Proxmox VE home lab and daily Obsidian production vaults.
+            </p>
+            <div class="author-bio-links">
+              <a href="../about.html">Lab Architecture &amp; Mission &rarr;</a>
+              <a href="../tools.html">Interactive Home Lab Web Tools &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+      </article>
+
+      <!-- Sidebar Column -->
+      <aside class="blog-sidebar">
+
+        <!-- Widget: About Channel -->
+        <div class="sidebar-widget">
+          <h4 class="widget-title">About Tech Simpld</h4>
+          <p style="font-size: 0.9rem; margin-bottom: 1rem;">
+            Software and productivity, simplified. We build and share direct, step-by-step guides for freemium SaaS
+            tools.
+          </p>
+          <a href="https://youtube.com/@TechSimpld" target="_blank" id="sidebarYoutubeBtn" class="btn btn-outline btn-sm" style="width: 100%;">
+            Visit YouTube Channel
+          </a>
+        </div>
+
+        <div class="sidebar-widget">
+          <h4 class="widget-title">Related Tutorials</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; line-height: 1.8;">
+            <li><a href="container-vs-vm-which-should-you-use.html" style="color: var(--accent-cyan);">Container vs. VM Comparison</a></li>
+            <li><a href="budget-proxmox-home-lab-setup.html" style="color: var(--text-primary);">Budget Proxmox Cluster Setup</a></li>
+            <li><a href="uptime-kuma-server-monitoring-setup.html" style="color: var(--text-primary);">Uptime Kuma Monitoring Setup</a></li>
+            <li><a href="../tools.html" style="color: var(--accent-yellow, #facc15);">Interactive Home Lab Web Tools</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div>
+        <a href="../index.html" class="footer-logo">
+          Tech Simpld<span class="logo-dot"></span>
+        </a>
+        <p class="footer-desc">
+          Software and productivity, simplified. Clean, no-fluff tutorials and templates for digital creators and
+          builders.
+        </p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../posts.html">Posts</a></li>
+          <li><a href="../resources.html">Resources</a></li>
+          <li><a href="../tools.html">Tools</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+          <li><a href="https://youtube.com/@TechSimpld" target="_blank">YouTube Channel</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact & Legal</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:techsimpld@gmail.com">techsimpld@gmail.com</a></li>
+          <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="../terms-of-service.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Tech Simpld. All rights reserved. Built for lightning-fast speeds.</div>
+      <div class="footer-socials">
+        <a href="https://youtube.com/@TechSimpld" class="social-link" aria-label="YouTube">YouTube</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/scripts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-hcl.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+</body>
+
+</html>
