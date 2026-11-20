@@ -1,0 +1,767 @@
+/*
+  Tech Simpld Studio - Release Page Stylesheet
+  Inherits core tokens from css/styles.css and brand.md.
+*/
+
+.studio-main {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 7.5rem 2rem 5rem;
+}
+
+/* Focus indicators (WCAG 3:1+, R-32) */
+.studio-main a:focus-visible,
+.studio-main button:focus-visible,
+.studio-main summary:focus-visible,
+.studio-lightbox-close:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Split Hero */
+.studio-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr);
+  gap: 3rem;
+  align-items: center;
+  padding: 1.5rem 0 4.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.studio-hero-title {
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+}
+
+.studio-hero-title span {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.studio-hero-lead {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 1.75rem;
+  max-width: 58ch;
+}
+
+.studio-meta-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.25rem;
+  list-style: none;
+  margin: 0 0 2rem 0;
+  padding: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.studio-meta-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.studio-meta-key {
+  color: #a78bfa;
+  font-weight: 600;
+}
+
+.studio-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.studio-hero-actions .btn {
+  min-height: 46px;
+  padding: 0.75rem 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.studio-text-link {
+  color: var(--accent-cyan);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.65rem 0.25rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.studio-text-link:hover {
+  color: var(--text-primary);
+}
+
+/* Screenshot Frame (interactive lightbox trigger) */
+.studio-shot-btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: zoom-in;
+  text-align: left;
+  box-shadow: var(--shadow-md);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.studio-shot-btn:hover {
+  border-color: var(--border-focus);
+  transform: translateY(-2px);
+}
+
+.studio-shot-btn img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.studio-shot-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.studio-shot-hint {
+  color: var(--accent-cyan);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Section Rhythm */
+.studio-section {
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.studio-section:last-of-type {
+  border-bottom: none;
+  padding-bottom: 1rem;
+}
+
+.studio-section-intro {
+  max-width: 68ch;
+  margin-bottom: 2.5rem;
+}
+
+.studio-section-kicker {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 0.5rem;
+}
+
+.studio-section-heading {
+  font-size: clamp(1.65rem, 2.8vw, 2.25rem);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.studio-section-desc {
+  font-size: 1.02rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+/* Comparison Split (SaaS vs Self-Hosted) */
+.studio-compare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+}
+
+.studio-compare-panel {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+}
+
+.studio-compare-panel.is-selfhosted {
+  background: var(--gradient-card);
+  border-color: var(--border-focus);
+}
+
+.studio-compare-panel h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.studio-compare-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.studio-compare-list li {
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+  line-height: 1.55;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.studio-compare-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.studio-compare-panel.is-selfhosted .studio-compare-list li::before {
+  background: var(--accent-cyan);
+}
+
+.studio-compare-list strong {
+  color: var(--text-primary);
+}
+
+/* Alternating Feature Spotlights */
+.studio-spotlights {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.studio-spotlight {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+  gap: 2.75rem;
+  align-items: center;
+}
+
+.studio-spotlight.is-reversed {
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+}
+
+.studio-spotlight.is-reversed .studio-spotlight-media {
+  order: 2;
+}
+
+.studio-spotlight.is-reversed .studio-spotlight-copy {
+  order: 1;
+}
+
+.studio-module-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #a78bfa;
+  margin-bottom: 0.45rem;
+}
+
+.studio-spotlight-copy h3 {
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  margin-bottom: 0.9rem;
+}
+
+.studio-spotlight-copy p {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  margin-bottom: 1.15rem;
+}
+
+.studio-feature-points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.studio-feature-points li {
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  padding-left: 1.15rem;
+  position: relative;
+}
+
+.studio-feature-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--accent-cyan);
+}
+
+.studio-feature-points strong {
+  color: var(--text-primary);
+}
+
+/* Tabbed Quickstart Installer */
+.studio-install-shell {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.studio-install-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.studio-tab-btn {
+  appearance: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 1.1rem;
+  min-height: 44px;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.studio-tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.studio-tab-btn[aria-selected="true"] {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--accent-cyan);
+}
+
+.studio-tab-panel {
+  padding: 1.75rem;
+}
+
+.studio-tab-panel[hidden] {
+  display: none;
+}
+
+.studio-install-step {
+  margin-bottom: 1.5rem;
+}
+
+.studio-install-step:last-child {
+  margin-bottom: 0;
+}
+
+.studio-install-step h3 {
+  font-size: 1.08rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.studio-install-step p {
+  font-size: 0.94rem;
+  margin-bottom: 0.75rem;
+}
+
+.studio-code-block {
+  position: relative;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.studio-code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.9rem;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(22, 25, 38, 0.6);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.studio-copy-btn {
+  appearance: none;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-focus);
+  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  min-height: 36px;
+  min-width: 72px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.studio-copy-btn:hover {
+  border-color: var(--accent-cyan);
+}
+
+.studio-copy-btn.is-copied {
+  border-color: #10b981;
+  color: #34d399;
+}
+
+.studio-code-block pre {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+/* Architecture & AI Spec Split */
+.studio-specs-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.studio-spec-block {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+}
+
+.studio-spec-block h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+}
+
+.studio-spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.92rem;
+}
+
+.studio-spec-table th,
+.studio-spec-table td {
+  text-align: left;
+  padding: 0.75rem 0.6rem;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: top;
+}
+
+.studio-spec-table th {
+  color: var(--text-primary);
+  font-weight: 600;
+  width: 34%;
+}
+
+.studio-spec-table td {
+  color: var(--text-secondary);
+}
+
+.studio-spec-table tr:last-child th,
+.studio-spec-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* FAQ Accordion */
+.studio-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 860px;
+}
+
+.studio-faq-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.studio-faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.15rem 1.4rem;
+  min-height: 52px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-title);
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.studio-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.studio-faq-plus {
+  color: var(--accent-cyan);
+  font-size: 1.25rem;
+  font-weight: 500;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.studio-faq-item[open] .studio-faq-plus {
+  transform: rotate(45deg);
+}
+
+.studio-faq-answer {
+  padding: 0 1.4rem 1.25rem;
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+.studio-faq-answer p {
+  margin-bottom: 0;
+}
+
+.studio-faq-answer code {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.88em;
+  color: var(--text-primary);
+}
+
+/* Closing Release CTA Band */
+.studio-cta-band {
+  background: var(--gradient-card);
+  border: 1px solid var(--border-focus);
+  border-radius: var(--radius-lg);
+  padding: 2.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.studio-cta-band h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  margin-bottom: 0.5rem;
+}
+
+.studio-cta-band p {
+  margin-bottom: 0;
+  max-width: 56ch;
+}
+
+.studio-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.studio-cta-actions .btn {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Accessible Screenshot Lightbox */
+.studio-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(7, 8, 13, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.studio-lightbox[hidden] {
+  display: none;
+}
+
+.studio-lightbox-dialog {
+  max-width: 1120px;
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-focus);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.studio-lightbox-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.studio-lightbox-title {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.studio-lightbox-close {
+  appearance: none;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-focus);
+  border-radius: var(--radius-sm);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.studio-lightbox-close:hover {
+  border-color: var(--accent-cyan);
+}
+
+.studio-lightbox-body {
+  padding: 1rem;
+  background: var(--bg-primary);
+}
+
+.studio-lightbox-body img {
+  width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* Tablet Breakpoint (640px - 1024px) */
+@media (max-width: 1024px) {
+  .studio-hero {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    padding: 1rem 0 3.5rem;
+  }
+
+  .studio-spotlight,
+  .studio-spotlight.is-reversed {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .studio-spotlight.is-reversed .studio-spotlight-media,
+  .studio-spotlight.is-reversed .studio-spotlight-copy {
+    order: initial;
+  }
+
+  .studio-specs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile Breakpoint (< 720px) */
+@media (max-width: 720px) {
+  .studio-main {
+    padding: 6rem 1.15rem 3.5rem;
+  }
+
+  .studio-section {
+    padding: 3rem 0;
+  }
+
+  .studio-compare-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .studio-compare-panel,
+  .studio-spec-block {
+    padding: 1.35rem;
+  }
+
+  .studio-tab-panel {
+    padding: 1.15rem;
+  }
+
+  .studio-install-tabs {
+    padding: 0.75rem;
+  }
+
+  .studio-tab-btn {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .studio-cta-band {
+    padding: 1.75rem 1.35rem;
+  }
+
+  .studio-spec-table th,
+  .studio-spec-table td {
+    display: block;
+    width: 100%;
+    padding: 0.4rem 0;
+  }
+
+  .studio-spec-table th {
+    border-bottom: none;
+    padding-top: 0.85rem;
+  }
+
+  .studio-shot-caption {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+}
+
+/* Visually hidden live region for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

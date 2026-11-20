@@ -103,6 +103,7 @@
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="posts.html" class="nav-link">Posts</a></li>
+        <li><a href="studio.html" class="nav-link">Studio</a></li>
         <li><a href="resources.html" class="nav-link active">Resources</a></li>
         <li><a href="tools.html" class="nav-link">Tools</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
@@ -133,10 +134,76 @@
       </p>
     </section>
 
-    <!-- Featured Resource 1: Obsidian Starter Vault -->
+    <!-- Featured Resource 0: Tech Simpld Studio -->
     <section style="margin-top: 2rem;">
       <div class="section-header">
-        <h2 class="section-title">Featured Configurations</h2>
+        <h2 class="section-title">Featured Open-Source Projects &amp; Configurations</h2>
+      </div>
+
+      <div class="featured-resource" style="margin-bottom: 2rem;">
+        <div class="resource-info">
+          <div class="badge badge-cyan">MIT Open Source</div>
+          <h2>Tech Simpld Studio (Self-Hosted YouTube Analytics &amp; CRM)</h2>
+          <p>
+            Our open-source FastAPI and SQLite creator dashboard. Track 48-hour launch velocity, CTR, retention curves, optimal end-screen timing, and audience hardware specs privately on Docker, Proxmox LXC, or Windows.
+          </p>
+          <ul class="resource-features">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <strong>100% Local SQLite Database:</strong> All channel analytics, transcripts, and viewer comments stay on your own server.
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <strong>Multi-Model AI (LiteLLM):</strong> Connect local Ollama instances alongside Anthropic Claude, OpenAI, or Gemini.
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <strong>One-Line Installers:</strong> Ready for Docker Compose, Linux/Proxmox LXC, and Windows PowerShell 5.1.
+            </li>
+          </ul>
+
+          <div class="resource-stats">
+            <div class="stat-item">
+              <span class="stat-label">License</span>
+              <span class="stat-value" style="color: var(--accent-cyan); font-weight: 600;">MIT License</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Source</span>
+              <span class="stat-value"><a href="https://github.com/techsimpld/TechSimpld-Studio" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: underline;">GitHub Repository</a></span>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="https://github.com/techsimpld/TechSimpld-Studio" target="_blank" rel="noopener noreferrer"
+              id="resourcesStudioGithubBtn" class="btn btn-primary"
+              style="display: inline-flex; align-items: center; justify-content: center;">
+              View on GitHub
+            </a>
+            <a href="studio.html" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center;">
+              Release Page &amp; Quickstart &rarr;
+            </a>
+          </div>
+        </div>
+        <div class="resource-preview">
+          <a href="studio.html" aria-label="View Tech Simpld Studio release page">
+            <picture>
+              <source srcset="images/studio-analytics-ctr.webp" type="image/webp">
+              <img class="resource-preview-img" src="images/studio-analytics-ctr.jpg" alt="Tech Simpld Studio Channel Analytics and CTR Preview" width="1024" height="630" loading="lazy" decoding="async">
+            </picture>
+          </a>
+        </div>
       </div>
       
       <div class="featured-resource" style="margin-bottom: 2rem;">

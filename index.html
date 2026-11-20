@@ -27,9 +27,9 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Simpld | Software and Productivity, Simplified</title>
+  <title>Tech Simpld | Home Lab Tutorials, Self-Hosted Tools &amp; Tech Simpld Studio</title>
   <meta name="description"
-    content="Step-by-step, no-fluff guides for self-hosting and productivity tools. Master Obsidian, Docker, and Proxmox to build your home lab.">
+    content="Step-by-step, no-fluff guides for Proxmox, Docker, and Obsidian, plus Tech Simpld Studio: our free, open-source self-hosted YouTube analytics and creator CRM.">
   <link rel="canonical" href="https://techsimpld.com/">
   <meta name="robots" content="index, follow">
 
@@ -38,17 +38,17 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Simpld">
   <meta property="og:url" content="https://techsimpld.com/">
-  <meta property="og:title" content="Tech Simpld | Software and Productivity, Simplified">
+  <meta property="og:title" content="Tech Simpld | Home Lab Tutorials, Self-Hosted Tools &amp; Tech Simpld Studio">
   <meta property="og:description"
-    content="Step-by-step, no-fluff guides for self-hosting and productivity tools. Master Obsidian, Docker, and Proxmox to build your home lab.">
-  <meta property="og:image" content="https://techsimpld.com/images/obsidian-vault.png">
+    content="Step-by-step, no-fluff guides for Proxmox, Docker, and Obsidian, plus Tech Simpld Studio: our free, open-source self-hosted YouTube analytics and creator CRM.">
+  <meta property="og:image" content="https://techsimpld.com/images/studio-analytics-ctr.jpg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tech Simpld | Software and Productivity, Simplified">
+  <meta name="twitter:title" content="Tech Simpld | Home Lab Tutorials, Self-Hosted Tools &amp; Tech Simpld Studio">
   <meta name="twitter:description"
-    content="Step-by-step, no-fluff guides for self-hosting and productivity tools. Master Obsidian, Docker, and Proxmox to build your home lab.">
-  <meta name="twitter:image" content="https://techsimpld.com/images/obsidian-vault.png">
+    content="Step-by-step, no-fluff guides for Proxmox, Docker, and Obsidian, plus Tech Simpld Studio: our free, open-source self-hosted YouTube analytics and creator CRM.">
+  <meta name="twitter:image" content="https://techsimpld.com/images/studio-analytics-ctr.jpg">
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -67,7 +67,8 @@
     "url": "https://techsimpld.com/",
     "logo": "https://techsimpld.com/images/obsidian-vault.png",
     "sameAs": [
-      "https://youtube.com/@TechSimpld"
+      "https://youtube.com/@TechSimpld",
+      "https://github.com/techsimpld"
     ]
   }
   </script>
@@ -110,6 +111,7 @@
         <li><a href="index.html" class="nav-link active">Home</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="posts.html" class="nav-link">Posts</a></li>
+        <li><a href="studio.html" class="nav-link">Studio</a></li>
         <li><a href="resources.html" class="nav-link">Resources</a></li>
         <li><a href="tools.html" class="nav-link">Tools</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
@@ -142,7 +144,89 @@
       </p>
       <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
         <a href="posts.html" class="btn btn-primary btn-lg">Read the Latest Guides</a>
-        <a href="resources.html" class="btn btn-outline btn-lg">Browse Free Resources</a>
+        <a href="studio.html" class="btn btn-outline btn-lg">Tech Simpld Studio (Open Source)</a>
+      </div>
+    </section>
+
+    <!-- Open-Source Release Spotlight: Tech Simpld Studio -->
+    <section id="techsimpld-studio-release" style="margin: 3.5rem 0 4.5rem;">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Open-Source Release: Tech Simpld Studio</h2>
+          <p class="section-subtitle">Self-hosted YouTube creator analytics, retention optimizer, and audience CRM built on FastAPI and SQLite</p>
+        </div>
+        <a href="studio.html" class="section-link">
+          Full Release Page
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+
+      <div class="featured-resource">
+        <div class="resource-info">
+          <div class="badge badge-cyan">MIT Open Source</div>
+          <h2>Self-Host Your Own YouTube Creator Studio</h2>
+          <p>
+            Skip paid browser extensions like VidIQ and TubeBuddy. Tech Simpld Studio runs locally on Docker, Proxmox LXC, or Windows, storing every channel snapshot, retention curve, transcript, and viewer comment inside your own SQLite database.
+          </p>
+          <ul class="resource-features">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              48-hour launch velocity tracking, CTR pulse, and timezone-aware Best Time to Publish heatmap
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Retention &amp; End-Screen Optimizer with outro cliff detection and Audience Tech Stack CRM
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Multi-model AI via LiteLLM (local Ollama, Claude, OpenAI, Gemini) and Gotify alerts
+            </li>
+          </ul>
+
+          <div class="resource-stats">
+            <div class="stat-item">
+              <span class="stat-label">License</span>
+              <span class="stat-value" style="color: var(--accent-cyan); font-weight: 600;">MIT (Free)</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Runtime</span>
+              <span class="stat-value">Docker / Python 3.11+</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
+            <a href="https://github.com/techsimpld/TechSimpld-Studio" target="_blank" rel="noopener noreferrer"
+              class="btn btn-primary" id="homeStudioGithubBtn">
+              View on GitHub
+            </a>
+            <a href="studio.html" id="homeStudioDetailsBtn" class="btn btn-outline">Screenshots &amp; Quickstart</a>
+          </div>
+        </div>
+        <div class="resource-preview">
+          <a href="studio.html" aria-label="View Tech Simpld Studio release page and screenshots">
+            <picture>
+              <source srcset="images/studio-analytics-ctr.webp" type="image/webp">
+              <img class="resource-preview-img" src="images/studio-analytics-ctr.jpg"
+                alt="Tech Simpld Studio Channel Analytics and CTR dashboard preview" width="1024" height="630"
+                loading="lazy" decoding="async">
+            </picture>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -525,6 +609,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="posts.html">Posts</a></li>
+          <li><a href="studio.html">Studio</a></li>
           <li><a href="resources.html">Resources</a></li>
           <li><a href="tools.html">Tools</a></li>
           <li><a href="contact.html">Contact</a></li>

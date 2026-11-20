@@ -28,7 +28,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>I Got Tired of Bad YouTube Creator Tools, So I Built My Own | Tech Simpld</title>
   <meta name="description"
-    content="How I built a self-hosted YouTube studio dashboard to replace VidIQ and TubeBuddy. Private transcript analysis, comment mining, and publishing time optimization.">
+    content="How I built Tech Simpld Studio, an open-source self-hosted YouTube analytics and creator CRM dashboard to replace VidIQ and TubeBuddy. Now available on GitHub.">
   <link rel="canonical" href="https://techsimpld.com/posts/custom-youtube-creator-tools-dashboard.html">
   <meta name="robots" content="index, follow">
 
@@ -62,7 +62,7 @@
       "https://techsimpld.com/images/creator-dashboard-step-3.png"
     ],
     "datePublished": "2026-10-02T10:00:00+00:00",
-    "dateModified": "2026-11-02T10:00:00-05:00",
+    "dateModified": "2026-11-19T21:00:00-05:00",
     "author": {
       "@type": "Person",
       "name": "Tech Simpld",
@@ -206,8 +206,21 @@
             Commercial alternatives like VidIQ and TubeBuddy certainly exist. However, they rely on steep monthly recurring subscriptions, aggressive upselling, and browser extensions that clutter your workstation. Worse, they operate on a temporary rental model: the moment you close the extension or cancel your subscription, all that research disappears.
           </p>
           <p>
-            Over the past several weeks, I prototyped and deployed my own self-hosted creator command center, tentatively named <strong>Tech Simpld Studio</strong>. By combining AI-assisted development tools with my existing homelab infrastructure, I built an application tailored specifically to my editorial workflow. Here is the full breakdown of why I built it, how it operates, and the major competitive advantages of self-hosting your creator data.
+            Over the past several weeks, I prototyped and deployed my own self-hosted creator command center, <strong>Tech Simpld Studio</strong>. By combining AI-assisted development tools with my existing homelab infrastructure, I built an application tailored specifically to my editorial workflow. Here is the full breakdown of why I built it, how it operates, and the major competitive advantages of self-hosting your creator data.
           </p>
+
+          <div style="background: var(--bg-secondary); border: 1px solid var(--accent-cyan); border-radius: 12px; padding: 1.35rem 1.5rem; margin: 1.75rem 0;">
+            <p style="margin: 0 0 0.75rem 0; color: var(--text-primary); font-weight: 600;">
+              Update (November 2026): Tech Simpld Studio is now officially open-source (MIT License).
+            </p>
+            <p style="margin: 0 0 1rem 0; font-size: 0.95rem;">
+              You can deploy it on Docker, Proxmox LXC, or Windows PowerShell using our one-line installers, inspect all 105 automated tests, or review the screenshots and full feature list.
+            </p>
+            <div style="display: flex; gap: 0.85rem; flex-wrap: wrap;">
+              <a href="https://github.com/techsimpld/TechSimpld-Studio" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">View on GitHub</a>
+              <a href="../studio.html" class="btn btn-outline btn-sm">Open Studio Release Page</a>
+            </div>
+          </div>
 
           <!-- System Architecture Diagram (Mermaid) -->
           <div class="mermaid-container">
@@ -372,7 +385,7 @@ flowchart TD
             <li><strong>Backend API:</strong> Python FastAPI managing asynchronous YouTube Data API v3 calls, database persistence, and background link verification jobs.</li>
             <li><strong>Database:</strong> SQLite / PostgreSQL storing video metadata, indexed comment threads, and parsed transcript records.</li>
             <li><strong>AI Inference:</strong> Configurable endpoints connecting to local Ollama instances for private data extraction and Anthropic API for complex reasoning (see my in-depth breakdown of <a href="local-llm-vs-cloud-ai-ollama-claude.html">Local LLM vs Cloud AI: Ollama vs Claude</a>).</li>
-            <li><strong>Deployment:</strong> Packaged as an internal container stack running inside an Ubuntu LXC container on our <a href="budget-proxmox-home-lab-setup.html">Budget Proxmox Cluster</a> (under active home lab testing ahead of an official public release).</li>
+            <li><strong>Deployment:</strong> Packaged as a Docker Compose stack or native Python 3.11+ service running on Linux, Proxmox LXC, or Windows, now publicly released under the MIT license on <a href="https://github.com/techsimpld/TechSimpld-Studio" target="_blank" rel="noopener noreferrer">GitHub</a> (see the <a href="../studio.html">Tech Simpld Studio release page</a> for one-line installers).</li>
           </ul>
 
           <h3>Automated Link Verification Engine: Python Implementation</h3>
@@ -408,8 +421,10 @@ async def verify_catalog_links(url_list: list[str], gotify_token: str, gotify_ur
             Building your own creator tools allows you to break free from the expensive SaaS subscription cycle while gaining permanent ownership over your research data. Instead of spending hours taking manual notes or guessing what your audience needs, you can operate with the analytical clarity and production velocity of a full media team.
           </p>
 
-          <h2>Helpful Resources & References</h2>
+          <h2>Helpful Resources &amp; References</h2>
           <ul>
+            <li><a href="https://github.com/techsimpld/TechSimpld-Studio" target="_blank" rel="noopener noreferrer">Tech Simpld Studio Official GitHub Repository (MIT License)</a></li>
+            <li><a href="../studio.html">Tech Simpld Studio Release Page, Screenshots &amp; Quickstart</a></li>
             <li><a href="https://developers.google.com/youtube/v3" target="_blank" rel="noopener noreferrer">YouTube Data API v3 Documentation</a></li>
             <li><a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer">FastAPI Web Framework Documentation</a></li>
             <li><a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">Docker Container Platform</a></li>
