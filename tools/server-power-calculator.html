@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KFGHVDB66"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-1KFGHVDB66');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5214277715351322"
+    crossorigin="anonymous"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Server Power &amp; Electricity Cost Calculator (TCO) | TechSimpld</title>
+  <meta name="description"
+    content="Calculate 24/7 home server wattage, monthly and annual electricity bills, 3-year TCO, and mini PC payoff timelines compared to enterprise rack servers.">
+  <link rel="canonical" href="https://techsimpld.com/tools/server-power-calculator.html">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / SEO -->
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TechSimpld">
+  <meta property="og:url" content="https://techsimpld.com/tools/server-power-calculator.html">
+  <meta property="og:title" content="Home Server Power &amp; Electricity Cost Calculator | TechSimpld">
+  <meta property="og:description"
+    content="Estimate true 24/7 home lab electricity costs, 3-year TCO, and mini PC vs. rack server breakeven months.">
+  <meta property="og:image" content="https://techsimpld.com/images/proxmox01-host-specs.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Home Server Power &amp; TCO Calculator | TechSimpld">
+  <meta name="twitter:description"
+    content="Model 24/7 idle vs. peak wattage, annual power costs, and hardware payoff timelines.">
+  <meta name="twitter:image" content="https://techsimpld.com/images/proxmox01-host-specs.png">
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "TechSimpld Home Server Power & Electricity Cost Calculator",
+    "url": "https://techsimpld.com/tools/server-power-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "TechSimpld",
+      "url": "https://techsimpld.com/about.html",
+      "sameAs": ["https://youtube.com/@TechSimpld", "https://github.com/techsimpld"]
+    },
+    "description": "Free client-side home server electricity cost, 3-year TCO, and rack server replacement payoff calculator."
+  }
+  </script>
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://techsimpld.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://techsimpld.com/tools.html" },
+      { "@type": "ListItem", "position": 3, "name": "Server Power Calculator", "item": "https://techsimpld.com/tools/server-power-calculator.html" }
+    ]
+  }
+  </script>
+
+  <!-- DNS Prefetch & Preconnect -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="alternate icon" type="image/png" href="../favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/tools.css">
+</head>
+
+<body class="tools-page">
+
+  <!-- Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo-link">
+        TechSimpld<span class="logo-dot"></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="../about.html" class="nav-link">About</a></li>
+        <li><a href="../posts.html" class="nav-link">Posts</a></li>
+        <li><a href="../studio.html" class="nav-link">Studio</a></li>
+        <li><a href="../resources.html" class="nav-link">Resources</a></li>
+        <li><a href="../tools.html" class="nav-link active">Tools</a></li>
+        <li><a href="../contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://youtube.com/@TechSimpld" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" id="subscribeHeaderBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+          Subscribe
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="tools-container tool-standalone-main">
+
+    <section class="tools-hero">
+      <nav class="tool-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="../tools.html">Tools</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Server Power Calculator</span>
+      </nav>
+      <div class="tools-hero-row">
+        <div>
+          <h1 class="tools-title">Home Server Power &amp; <span>Electricity Cost Calculator</span></h1>
+          <p class="tool-intro-lead">
+            A cheap used enterprise rack server can quietly cost more in annual electricity than a brand-new mini PC. Model your idle and peak wall wattage, daily active load hours, and local kWh rate below to calculate your 3-year Total Cost of Ownership (TCO) and exact hardware payoff timeline.
+          </p>
+        </div>
+        <button type="button" class="tool-btn tool-btn-primary" id="copyPowerSummaryBtn">
+          Copy Power Summary
+        </button>
+      </div>
+    </section>
+
+    <section class="tool-section active" id="tool-power">
+      <div class="tool-card">
+        <!-- Presets Bar -->
+        <div style="margin-bottom: 1.5rem;">
+          <label class="form-label">Quick Hardware Profiles</label>
+          <div class="subnet-presets-bar" id="powerPresetsBar">
+            <button type="button" class="preset-chip active" data-idle="8" data-peak="25" data-hours="3" data-cost="160">
+              Intel N100 Mini PC (8W/25W)
+            </button>
+            <button type="button" class="preset-chip" data-idle="15" data-peak="45" data-hours="4" data-cost="180">
+              1L Tiny Desktop (15W/45W)
+            </button>
+            <button type="button" class="preset-chip" data-idle="35" data-peak="95" data-hours="4" data-cost="450">
+              Custom Desktop Server (35W/95W)
+            </button>
+            <button type="button" class="preset-chip" data-idle="28" data-peak="62" data-hours="6" data-cost="350">
+              4-Bay Synology NAS (28W/62W)
+            </button>
+            <button type="button" class="preset-chip" data-idle="135" data-peak="240" data-hours="6" data-cost="250">
+              2U Rack Server R720/R730 (135W/240W)
+            </button>
+            <button type="button" class="preset-chip" data-idle="9" data-peak="22" data-hours="3" data-cost="220">
+              Raspberry Pi 5 Cluster (9W/22W)
+            </button>
+          </div>
+        </div>
+
+        <!-- Calculator Form & Metrics Grid Layout -->
+        <div class="docker-grid-layout" style="align-items: start;">
+          <div>
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="form-label" for="powerIdleWatts" style="margin-bottom: 0;">Idle Power Draw (Watts)</label>
+                <span class="range-number-display" id="idleWattsDisplay">8 W</span>
+              </div>
+              <input type="range" class="tool-range-slider" id="powerIdleWatts" min="5" max="350" step="1" value="8">
+              <span class="form-hint">Baseline draw when CPU is idling and storage is not under heavy I/O</span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="form-label" for="powerPeakWatts" style="margin-bottom: 0;">Peak / Load Power Draw (Watts)</label>
+                <span class="range-number-display" id="peakWattsDisplay">25 W</span>
+              </div>
+              <input type="range" class="tool-range-slider" id="powerPeakWatts" min="10" max="600" step="1" value="25">
+              <span class="form-hint">Power during Plex transcoding, Nextcloud indexing, or game server activity</span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="form-label" for="powerPeakHours" style="margin-bottom: 0;">Active Heavy Load Duration (Hours/Day)</label>
+                <span class="range-number-display" id="peakHoursDisplay">3 hrs</span>
+              </div>
+              <input type="range" class="tool-range-slider" id="powerPeakHours" min="0" max="24" step="0.5" value="3">
+              <span class="form-hint">Remaining hours of the 24h day are calculated at Idle Power</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label" for="powerCostKwh">Electricity Rate ($/kWh)</label>
+                <input type="number" class="form-input" id="powerCostKwh" value="0.16" step="0.01" min="0.01" max="1.50">
+                <span class="form-hint">US Avg: $0.16, EU Avg: $0.30</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="powerHardwareCost">Hardware Price ($)</label>
+                <input type="number" class="form-input" id="powerHardwareCost" value="160" step="10" min="0">
+                <span class="form-hint">Purchase cost for TCO &amp; ROI</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="results-metric-grid">
+              <div class="result-metric-card">
+                <div class="metric-label">Weighted Average Draw</div>
+                <div class="metric-value highlight" id="resAvgWatts">10.1 W</div>
+                <div class="metric-subtext">True continuous 24/7 baseline</div>
+              </div>
+              <div class="result-metric-card">
+                <div class="metric-label">Daily Power Cost</div>
+                <div class="metric-value" id="resDailyCost">$0.04</div>
+                <div class="metric-subtext" id="resDailyKwh">0.24 kWh / day</div>
+              </div>
+              <div class="result-metric-card">
+                <div class="metric-label">Monthly Power Cost</div>
+                <div class="metric-value" id="resMonthlyCost">$1.18</div>
+                <div class="metric-subtext" id="resMonthlyKwh">7.4 kWh / month</div>
+              </div>
+              <div class="result-metric-card">
+                <div class="metric-label">Annual Power Cost</div>
+                <div class="metric-value highlight" id="resAnnualCost">$14.19</div>
+                <div class="metric-subtext" id="resAnnualKwh">88.7 kWh / year</div>
+              </div>
+            </div>
+
+            <div class="result-metric-card" style="margin-bottom: 1rem; border-color: rgba(250, 204, 21, 0.3);">
+              <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                <div>
+                  <div class="metric-label">3-Year Total Cost of Ownership (TCO)</div>
+                  <div class="metric-value highlight" style="font-size: 1.5rem;" id="resThreeYearTco">$202.57</div>
+                </div>
+                <div style="text-align: right; font-size: 0.8rem; color: var(--tools-text-muted);" id="resTcoBreakdown">
+                  Hardware: $160 | Power: $42.57
+                </div>
+              </div>
+            </div>
+
+            <div class="tco-comparison-card">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span class="status-pill safe">Efficiency Payoff Analysis</span>
+                <span style="font-size: 0.75rem; color: var(--tools-text-muted);">vs 160W Rack Server</span>
+              </div>
+              <div style="margin-bottom: 0.75rem;">
+                <div class="tco-savings-number" id="resPayoffAnnualSavings">$210.53 / yr</div>
+                <div style="font-size: 0.85rem; color: var(--tools-text-secondary);">
+                  Annual electricity savings compared to keeping an older enterprise rack server running 24/7.
+                </div>
+              </div>
+              <div style="padding-top: 0.75rem; border-top: 1px solid var(--tools-border); font-size: 0.85rem; color: var(--tools-text-primary);">
+                Hardware Breakeven: <strong style="color: var(--tools-yellow);" id="resPayoffMonths">9.1 months</strong> until power savings cover the entire hardware purchase cost.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visible Editorial Guide -->
+    <article class="tool-editorial-guide">
+      <h2>Home Lab Power &amp; Energy Optimization Guide</h2>
+      <p>
+        Every watt of continuous 24/7 draw equals roughly 8.76 kWh per year. At $0.16/kWh, a 150 W enterprise rack server costs about $210 per year just to sit idle, whereas a refurbished desktop or mini PC drawing 15 W to 25 W costs $21 to $35 per year. That gap is why the TechSimpld cluster runs three Dell OptiPlex 9020 hosts instead of decommissioned dual-Xeon rack gear.
+      </p>
+
+      <h3>Practical Ways to Lower Wall Power Draw</h3>
+      <ul>
+        <li><strong>Measure wall draw instead of reading CPU TDP:</strong> TDP describes thermal cooling requirements under sustained full load, not idle power. Plug your server into a $15 Kill A Watt meter or smart plug to capture real idle and peak numbers before sizing a UPS or estimating bills.</li>
+        <li><strong>Enable Linux CPU C-states with PowerTOP:</strong> On Proxmox VE or Debian/Ubuntu hosts, install PowerTOP and run <code>powertop --auto-tune</code> to let idle PCIe links, SATA controllers, and CPU cores drop into deep C6/C8 sleep states. Check that your NIC driver remains stable before making the setting persistent via systemd.</li>
+        <li><strong>Switch Proxmox CPU governors from performance to powersave or ondemand:</strong> Proxmox defaults to the <code>performance</code> governor, holding clocks high even when VMs are idle. Switching to <code>ondemand</code> or <code>schedutil</code> trims idle wattage with no noticeable latency penalty for typical self-hosted apps.</li>
+        <li><strong>Watch spinning hard drives and PCIe cards:</strong> Each 3.5-inch SATA or SAS drive adds 6 W to 9 W continuously, and older 10 GbE or HBA cards can block deep package C-states. Use SSDs for active VM/LXC pools and reserve spinning arrays for cold backups or media that can spin down.</li>
+      </ul>
+
+      <h3>Related Hardware &amp; Lab Guides</h3>
+      <div class="tool-related-links">
+        <a href="../posts/budget-proxmox-home-lab-setup.html" class="tool-related-card">
+          <span class="tool-related-tag">Hardware Build</span>
+          <span class="tool-related-title">Budget 3-Node Proxmox Home Lab Setup</span>
+          <span class="tool-related-desc">Why refurbished OptiPlex desktops beat noisy enterprise rack servers at home.</span>
+        </a>
+        <a href="../posts/local-llm-vs-cloud-ai-ollama-claude.html" class="tool-related-card">
+          <span class="tool-related-tag">Power vs. Cost</span>
+          <span class="tool-related-title">Local LLM vs. Cloud AI (Ollama vs. Claude)</span>
+          <span class="tool-related-desc">Comparing GPU electricity draw and hardware cost against API token pricing.</span>
+        </a>
+        <a href="../posts/uptime-kuma-server-monitoring-setup.html" class="tool-related-card">
+          <span class="tool-related-tag">Operations</span>
+          <span class="tool-related-title">Uptime Kuma Server Monitoring</span>
+          <span class="tool-related-desc">Track uptime across low-power cluster nodes and receive alerts on power events.</span>
+        </a>
+      </div>
+
+      <h3>Other Home Lab Utilities</h3>
+      <div class="tools-sibling-nav">
+        <a href="docker-compose-generator.html" class="tools-sibling-link">Docker Compose Generator</a>
+        <a href="proxmox-resource-sizer.html" class="tools-sibling-link">Proxmox Resource Sizer</a>
+        <a href="subnet-calculator.html" class="tools-sibling-link">IPv4 Subnet Calculator</a>
+        <a href="obsidian-markdown-formatter.html" class="tools-sibling-link">Obsidian Markdown Formatter</a>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div>
+        <a href="/" class="footer-logo">
+          TechSimpld<span class="logo-dot"></span>
+        </a>
+        <p class="footer-desc">
+          Software and productivity, simplified. Clean, no-fluff tutorials, blueprints, and interactive tools for digital creators and builders.
+        </p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../posts.html">Posts</a></li>
+          <li><a href="../resources.html">Resources</a></li>
+          <li><a href="../tools.html">Tools</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact &amp; Legal</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:techsimpld@gmail.com">techsimpld@gmail.com</a></li>
+          <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="../terms-of-service.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TechSimpld. All rights reserved. Client-side tools processed 100% in your browser.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/scripts.js"></script>
+  <script src="../js/tools.js"></script>
+</body>
+
+</html>

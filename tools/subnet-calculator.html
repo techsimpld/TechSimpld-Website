@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KFGHVDB66"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-1KFGHVDB66');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5214277715351322"
+    crossorigin="anonymous"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPv4 Subnet &amp; VLAN Calculator for Home Labs | TechSimpld</title>
+  <meta name="description"
+    content="Calculate CIDR subnet ranges, broadcast addresses, wildcard masks, and VLAN sub-divisions in your browser. Includes a recommended home lab IP allocation map to avoid DHCP collisions.">
+  <link rel="canonical" href="https://techsimpld.com/tools/subnet-calculator.html">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / SEO -->
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TechSimpld">
+  <meta property="og:url" content="https://techsimpld.com/tools/subnet-calculator.html">
+  <meta property="og:title" content="IPv4 Subnet &amp; VLAN Calculator for Home Labs | TechSimpld">
+  <meta property="og:description"
+    content="Instant CIDR calculator, home lab static IP allocation visualizer, and VLAN subnet splitting matrix.">
+  <meta property="og:image" content="https://techsimpld.com/images/proxmox01-host-specs.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IPv4 Subnet &amp; VLAN Calculator | TechSimpld">
+  <meta name="twitter:description"
+    content="Calculate CIDR pools, usable host ranges, and VLAN splits for your home lab network.">
+  <meta name="twitter:image" content="https://techsimpld.com/images/proxmox01-host-specs.png">
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "TechSimpld IPv4 Subnet & VLAN Calculator",
+    "url": "https://techsimpld.com/tools/subnet-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "TechSimpld",
+      "url": "https://techsimpld.com/about.html",
+      "sameAs": ["https://youtube.com/@TechSimpld", "https://github.com/techsimpld"]
+    },
+    "description": "Free client-side IPv4 CIDR subnet calculator, home lab IP allocation planner, and VLAN splitting matrix."
+  }
+  </script>
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://techsimpld.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://techsimpld.com/tools.html" },
+      { "@type": "ListItem", "position": 3, "name": "IPv4 Subnet Calculator", "item": "https://techsimpld.com/tools/subnet-calculator.html" }
+    ]
+  }
+  </script>
+
+  <!-- DNS Prefetch & Preconnect -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="alternate icon" type="image/png" href="../favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/tools.css">
+</head>
+
+<body class="tools-page">
+
+  <!-- Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo-link">
+        TechSimpld<span class="logo-dot"></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="../about.html" class="nav-link">About</a></li>
+        <li><a href="../posts.html" class="nav-link">Posts</a></li>
+        <li><a href="../studio.html" class="nav-link">Studio</a></li>
+        <li><a href="../resources.html" class="nav-link">Resources</a></li>
+        <li><a href="../tools.html" class="nav-link active">Tools</a></li>
+        <li><a href="../contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://youtube.com/@TechSimpld" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" id="subscribeHeaderBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+          Subscribe
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="tools-container tool-standalone-main">
+
+    <section class="tools-hero">
+      <nav class="tool-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="../tools.html">Tools</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">IPv4 Subnet Calculator</span>
+      </nav>
+      <div class="tools-hero-row">
+        <div>
+          <h1 class="tools-title">IPv4 Subnet &amp; <span>VLAN Calculator</span></h1>
+          <p class="tool-intro-lead">
+            Mixing static server IPs into your router's DHCP range is one of the fastest ways to cause intermittent outages in a home lab. Enter any IPv4 address or CIDR block below to verify network boundaries, map clean static address ranges, and split a flat subnet into isolated VLANs.
+          </p>
+        </div>
+        <button type="button" class="tool-btn tool-btn-primary" id="copySubnetSummaryBtn">
+          Copy Network Summary
+        </button>
+      </div>
+    </section>
+
+    <section class="tool-section active" id="tool-subnet">
+      <div class="tool-card calculator-input-card">
+        <div class="ip-input-row">
+          <div class="form-group">
+            <label class="form-label" for="calcIpAddress">IP Address or CIDR</label>
+            <input type="text" class="form-input" id="calcIpAddress" value="192.168.1.1" placeholder="e.g. 192.168.1.1 or 10.0.0.1/24" spellcheck="false">
+            <span class="form-hint">Enter host IP or network address (supports CIDR notation)</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="calcCidrPrefix">Subnet Mask (CIDR)</label>
+            <select class="form-select" id="calcCidrPrefix">
+              <!-- Dynamically populated /8 to /30 -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="calcVlanTag">VLAN ID (Optional)</label>
+            <input type="number" class="form-input" id="calcVlanTag" value="1" min="1" max="4094" placeholder="1 - 4094">
+          </div>
+        </div>
+
+        <div>
+          <label class="form-label" style="font-size: 0.8rem; text-transform: uppercase; color: var(--tools-text-muted);">
+            Quick Presets for Home Labs:
+          </label>
+          <div class="subnet-presets-bar" id="subnetPresets">
+            <!-- Dynamically populated buttons -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Metric Grid -->
+      <div class="results-metric-grid">
+        <div class="metric-card highlight">
+          <div class="metric-label">Network Address (CIDR)</div>
+          <div class="metric-value yellow" id="resNetworkAddr">192.168.1.0 /24</div>
+          <div class="metric-binary" id="binIpAddr">11000000.10101000.00000001.00000000</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Subnet Mask</div>
+          <div class="metric-value" id="resSubnetMask">255.255.255.0</div>
+          <div class="metric-binary" id="binNetmask">11111111.11111111.11111111.00000000</div>
+        </div>
+
+        <div class="metric-card highlight">
+          <div class="metric-label">Usable Host Range</div>
+          <div class="metric-value cyan" id="resUsableRange">192.168.1.1 - 192.168.1.254</div>
+          <div style="font-size: 0.75rem; color: var(--tools-text-muted); margin-top: 0.35rem;">First usable &amp; last usable host</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Broadcast Address</div>
+          <div class="metric-value" id="resBroadcastAddr">192.168.1.255</div>
+          <div style="font-size: 0.75rem; color: var(--tools-text-muted); margin-top: 0.35rem;">Directed broadcast IP</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Usable Hosts</div>
+          <div class="metric-value yellow" id="resUsableHosts">254</div>
+          <div style="font-size: 0.75rem; color: var(--tools-text-muted); margin-top: 0.35rem;">Total hosts: <span id="resTotalAddresses">256</span></div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Wildcard Mask</div>
+          <div class="metric-value" id="resWildcardMask">0.0.0.255</div>
+          <div style="font-size: 0.75rem; color: var(--tools-text-muted); margin-top: 0.35rem;">ACL / OSPF mask</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Network Scope</div>
+          <div class="metric-value" style="font-size: 1rem;" id="resIpScope">Private (RFC 1918 Class C)</div>
+          <div style="font-size: 0.75rem; color: var(--tools-text-muted); margin-top: 0.35rem;">Non-routable on public internet</div>
+        </div>
+      </div>
+
+      <!-- Homelab IP Allocation Visualizer -->
+      <div class="tool-card">
+        <h2 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--tools-text-primary);">
+          Recommended Home Lab IP Distribution
+        </h2>
+        <p style="font-size: 0.875rem; color: var(--tools-text-secondary); margin-bottom: 1rem;">
+          Standardizing your address assignments prevents IP collisions between Proxmox hypervisors, Docker bridges, and DHCP leases:
+        </p>
+        <div id="homelabAllocVisualizer">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Subnet Subdivision Matrix -->
+      <div class="tool-card">
+        <h2 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--tools-text-primary);">
+          VLAN Sub-Dividing Matrix (Split Network)
+        </h2>
+        <p style="font-size: 0.875rem; color: var(--tools-text-secondary); margin-bottom: 0.5rem;">
+          How to split this network evenly to isolate servers, IoT gear, and guest devices:
+        </p>
+        <div id="subnetSplittingTable">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Visible Editorial Guide -->
+    <article class="tool-editorial-guide">
+      <h2>How to Plan Clean Subnets &amp; VLANs for a Home Lab</h2>
+      <p>
+        In the TechSimpld lab, we separate traffic across managed switch VLANs so everyday home devices never share broadcast domains with hypervisor storage replication. Home LAN clients stay on the primary subnet, Proxmox VMs and LXC containers run on VLAN 100, and Ceph cluster replication traffic is isolated on VLAN 200.
+      </p>
+
+      <h3>Practical IP Allocation Rules</h3>
+      <ol>
+        <li><strong>Carve out static space before DHCP starts:</strong> Reserve <code>.1</code> for your gateway, <code>.2</code> through <code>.19</code> for managed switches and access points, and <code>.20</code> through <code>.99</code> for Proxmox hosts, NAS boxes, and DNS servers. Start your DHCP pool at <code>.100</code> or higher.</li>
+        <li><strong>Match VLAN IDs to the third octet:</strong> Using <code>10.10.100.0/24</code> for VLAN 100 and <code>10.10.200.0/24</code> for VLAN 200 makes firewall rules and troubleshooting logs immediately readable without opening a spreadsheet.</li>
+        <li><strong>Avoid 192.168.1.0/24 if you use VPNs:</strong> If you connect back to your home lab over WireGuard from coffee shops, hotels, or offices, those remote networks frequently use <code>192.168.1.0/24</code> or <code>192.168.0.0/24</code>. Choosing a less common RFC 1918 block like <code>10.42.x.0/24</code> eliminates routing conflicts.</li>
+        <li><strong>Do not over-shrink home lab subnets:</strong> A <code>/24</code> (254 usable hosts) is the sweet spot for almost every home lab VLAN. Smaller masks like <code>/28</code> save no real resources in private IPv4 space and only create headaches when you add containers later.</li>
+      </ol>
+
+      <h3>Related Networking Guides</h3>
+      <div class="tool-related-links">
+        <a href="../posts/cloudflare-zero-trust-tunnel-guide.html" class="tool-related-card">
+          <span class="tool-related-tag">Remote Access</span>
+          <span class="tool-related-title">Cloudflare Zero Trust Tunnel Guide</span>
+          <span class="tool-related-desc">Expose internal lab services safely without opening firewall ports.</span>
+        </a>
+        <a href="../posts/pihole-installation-guide.html" class="tool-related-card">
+          <span class="tool-related-tag">Local DNS</span>
+          <span class="tool-related-title">Pi-hole Installation Guide</span>
+          <span class="tool-related-desc">Assign static IPs and configure network-wide DNS filtering.</span>
+        </a>
+        <a href="../posts/adguard-home-1-0-beta-setup-guide.html" class="tool-related-card">
+          <span class="tool-related-tag">DNS Filtering</span>
+          <span class="tool-related-title">AdGuard Home Setup Guide</span>
+          <span class="tool-related-desc">Deploy encrypted DNS and per-client blocking rules on your LAN.</span>
+        </a>
+        <a href="../posts/uptime-kuma-server-monitoring-setup.html" class="tool-related-card">
+          <span class="tool-related-tag">Monitoring</span>
+          <span class="tool-related-title">Uptime Kuma Server Monitoring</span>
+          <span class="tool-related-desc">Monitor every static host and gateway across your VLANs.</span>
+        </a>
+      </div>
+
+      <h3>Other Home Lab Utilities</h3>
+      <div class="tools-sibling-nav">
+        <a href="docker-compose-generator.html" class="tools-sibling-link">Docker Compose Generator</a>
+        <a href="proxmox-resource-sizer.html" class="tools-sibling-link">Proxmox Resource Sizer</a>
+        <a href="server-power-calculator.html" class="tools-sibling-link">Server Power &amp; TCO Calculator</a>
+        <a href="obsidian-markdown-formatter.html" class="tools-sibling-link">Obsidian Markdown Formatter</a>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div>
+        <a href="/" class="footer-logo">
+          TechSimpld<span class="logo-dot"></span>
+        </a>
+        <p class="footer-desc">
+          Software and productivity, simplified. Clean, no-fluff tutorials, blueprints, and interactive tools for digital creators and builders.
+        </p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../posts.html">Posts</a></li>
+          <li><a href="../resources.html">Resources</a></li>
+          <li><a href="../tools.html">Tools</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact &amp; Legal</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:techsimpld@gmail.com">techsimpld@gmail.com</a></li>
+          <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="../terms-of-service.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TechSimpld. All rights reserved. Client-side tools processed 100% in your browser.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/scripts.js"></script>
+  <script src="../js/tools.js"></script>
+</body>
+
+</html>

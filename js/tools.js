@@ -1,5 +1,5 @@
 /* 
-  Tech Simpld - Interactive Client-Side Tools Engine
+  TechSimpld - Interactive Client-Side Tools Engine
   Tool 1: Docker Compose & Environment File Generator
   Tool 2: Markdown Table & Frontmatter Formatter
   Tool 3: Local Network Subnet & IP Calculator
@@ -655,7 +655,7 @@ function initDockerGenerator() {
 
     let yamlLines = [
       `# ==============================================================================`,
-      `# Tech Simpld - Production Docker Compose Template`,
+      `# TechSimpld - Production Docker Compose Template`,
       `# Project: ${projectName} | Generated: Client-Side via techsimpld.com/tools.html`,
       `# ==============================================================================`,
       `services:`
@@ -776,7 +776,7 @@ function initDockerGenerator() {
     // Build .env content
     let envLines = [
       `# ==============================================================================`,
-      `# Tech Simpld - Environment Variables Template (.env)`,
+      `# TechSimpld - Environment Variables Template (.env)`,
       `# Put this in the same folder as your docker-compose.yml`,
       `# ==============================================================================`,
       ``
@@ -878,7 +878,7 @@ npm-proxy, 10.10.10.50, Cloudflare SSL Gateway, 2GB, Secure`;
 tags: proxmox, homelab, virtualization, ceph
 category: Tutorials
 date: 2026-11-02
-author: Tech Simpld
+author: TechSimpld
 status: published
 summary: Step-by-step blueprint for building a high-availability budget Proxmox cluster with shared Ceph storage.`;
     runFormat();
@@ -1358,7 +1358,7 @@ function initSubnetCalculator() {
     const hosts = document.getElementById('resUsableHosts')?.textContent || '';
     const scope = document.getElementById('resIpScope')?.textContent || '';
 
-    return `Tech Simpld - Subnet & IP Calculation Summary
+    return `TechSimpld - Subnet & IP Calculation Summary
 --------------------------------------------------
 Network Address : ${net}
 Subnet Mask     : ${mask}
@@ -1501,7 +1501,7 @@ function initPowerCalculator() {
       const savings = resPayoffAnnualSavings?.textContent || '';
       const breakeven = resPayoffMonths?.textContent || '';
 
-      const summary = `Tech Simpld - Home Server Power & Electricity Summary
+      const summary = `TechSimpld - Home Server Power & Electricity Summary
 ------------------------------------------------------
 Average Draw (24/7) : ${avg}
 Daily Electricity   : ${daily}
@@ -1825,7 +1825,7 @@ function initProxmoxPlanner() {
         `- ${w.name} (${w.type.toUpperCase()}): ${w.cores} vCPUs, ${w.ram}MB RAM, ${w.disk}GB Disk`
       ).join('\n');
 
-      const summary = `Tech Simpld - Proxmox LXC & VM Sizing Summary
+      const summary = `TechSimpld - Proxmox LXC & VM Sizing Summary
 ------------------------------------------------------
 Host Specifications: ${hostCores} Cores | ${hostRam} GB RAM | ${hostDisk} GB Storage
 Committed Memory   : ${ramCommitted} / ${hostRam} GB (${ramPercent})

@@ -1,11 +1,11 @@
 /* 
-  Tech Simpld - Interactive Tools Stylesheet
+  TechSimpld - Interactive Tools Stylesheet
   Aesthetic: Deep Charcoal/Slate (#0f172a), Dark Slate Cards (#1e293b), Subtle Borders (#334155), Tech-Yellow (#facc15)
   Pure client-side responsive layout with zero external framework dependencies.
 */
 
 :root {
-  /* Tech Simpld Tools Theme Tokens */
+  /* TechSimpld Tools Theme Tokens */
   --tools-bg-canvas: #0f172a;
   --tools-card-bg: #1e293b;
   --tools-card-bg-elevated: #243248;
@@ -1450,5 +1450,275 @@
   outline: 2px solid var(--tools-yellow);
   outline-offset: 2px;
 }
+
+/* ==========================================================================
+   Standalone Tool Pages & Directory Hub Layout
+   ========================================================================== */
+.tool-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--tools-text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.tool-breadcrumb a {
+  color: var(--tools-text-secondary);
+  text-decoration: none;
+}
+
+.tool-breadcrumb a:hover,
+.tool-breadcrumb a:focus-visible {
+  color: var(--tools-yellow);
+  text-decoration: underline;
+}
+
+.tool-standalone-main {
+  padding-top: 5.5rem;
+}
+
+.tool-intro-lead {
+  font-size: 1.02rem;
+  color: var(--tools-text-secondary);
+  line-height: 1.65;
+  max-width: 860px;
+  margin-top: 0.5rem;
+}
+
+.tool-editorial-guide {
+  margin-top: 2.25rem;
+  background-color: var(--tools-card-bg);
+  border: 1px solid var(--tools-border);
+  border-radius: var(--tools-radius-lg);
+  padding: 2rem;
+  color: var(--tools-text-secondary);
+  line-height: 1.7;
+}
+
+.tool-editorial-guide h2 {
+  font-family: var(--font-title, 'Outfit', sans-serif);
+  font-size: 1.55rem;
+  color: var(--tools-text-primary);
+  margin: 0 0 0.85rem;
+}
+
+.tool-editorial-guide h3 {
+  font-family: var(--font-title, 'Outfit', sans-serif);
+  font-size: 1.15rem;
+  color: var(--tools-text-primary);
+  margin: 1.65rem 0 0.6rem;
+}
+
+.tool-editorial-guide p {
+  margin: 0 0 1rem;
+}
+
+.tool-editorial-guide ul,
+.tool-editorial-guide ol {
+  margin: 0 0 1.25rem;
+  padding-left: 1.35rem;
+}
+
+.tool-editorial-guide li {
+  margin-bottom: 0.55rem;
+}
+
+.tool-editorial-guide code {
+  background-color: var(--tools-code-bg);
+  border: 1px solid var(--tools-border);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.88em;
+  color: var(--tools-yellow);
+}
+
+.tool-editorial-guide a {
+  color: var(--tools-accent-cyan);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.tool-editorial-guide a:hover,
+.tool-editorial-guide a:focus-visible {
+  color: var(--tools-yellow);
+}
+
+.tool-related-links {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--tools-border);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.tool-related-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.15rem;
+  background-color: var(--tools-card-inner);
+  border: 1px solid var(--tools-border);
+  border-radius: var(--tools-radius-md);
+  text-decoration: none !important;
+  min-height: 44px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.tool-related-card:hover,
+.tool-related-card:focus-visible {
+  border-color: var(--tools-yellow);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.tool-related-card:focus-visible {
+  outline: 2px solid var(--tools-yellow);
+  outline-offset: 2px;
+}
+
+.tool-related-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--tools-yellow);
+}
+
+.tool-related-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--tools-text-primary);
+}
+
+.tool-related-desc {
+  font-size: 0.84rem;
+  color: var(--tools-text-muted);
+  line-height: 1.45;
+}
+
+/* Directory Hub Grid on tools.html */
+.tools-directory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.tools-directory-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--tools-card-bg);
+  border: 1px solid var(--tools-border);
+  border-radius: var(--tools-radius-lg);
+  padding: 1.5rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.tools-directory-card:hover {
+  border-color: var(--tools-border-focus);
+  transform: translateY(-2px);
+}
+
+.tools-directory-card-featured {
+  grid-column: 1 / -1;
+  background: linear-gradient(150deg, #1b2840 0%, #152033 100%);
+  border-color: rgba(250, 204, 21, 0.35);
+}
+
+.tools-directory-cat {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--tools-accent-cyan);
+  margin-bottom: 0.45rem;
+}
+
+.tools-directory-card h2 {
+  font-family: var(--font-title, 'Outfit', sans-serif);
+  font-size: 1.3rem;
+  color: var(--tools-text-primary);
+  margin: 0 0 0.55rem;
+}
+
+.tools-directory-card p {
+  font-size: 0.92rem;
+  color: var(--tools-text-secondary);
+  line-height: 1.6;
+  margin: 0 0 1.15rem;
+}
+
+.tools-directory-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.25rem;
+}
+
+.tools-directory-chip {
+  font-size: 0.78rem;
+  color: var(--tools-text-secondary);
+  background-color: var(--tools-code-bg);
+  border: 1px solid var(--tools-border);
+  border-radius: 4px;
+  padding: 0.22rem 0.55rem;
+}
+
+.tools-directory-actions {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tools-directory-actions .tool-btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.tools-sibling-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.tools-sibling-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.5rem 0.95rem;
+  background-color: var(--tools-card-inner);
+  border: 1px solid var(--tools-border);
+  border-radius: var(--tools-radius-sm);
+  color: var(--tools-text-secondary) !important;
+  text-decoration: none !important;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.tools-sibling-link:hover,
+.tools-sibling-link:focus-visible {
+  border-color: var(--tools-yellow);
+  color: var(--tools-yellow) !important;
+}
+
+@media (max-width: 768px) {
+  .tool-editorial-guide {
+    padding: 1.35rem;
+  }
+
+  .tools-directory-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 

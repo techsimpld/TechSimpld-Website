@@ -1,5 +1,5 @@
 /*
-  Tech Simpld Studio - Release Page Interactions
+  TechSimpld Studio - Release Page Interactions
   Handles install tabs, copy-to-clipboard buttons, and accessible screenshot lightbox.
 */
 

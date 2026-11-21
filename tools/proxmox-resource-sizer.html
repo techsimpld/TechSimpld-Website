@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KFGHVDB66"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-1KFGHVDB66');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5214277715351322"
+    crossorigin="anonymous"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proxmox LXC &amp; VM Resource Sizing Planner | TechSimpld</title>
+  <meta name="description"
+    content="Plan Proxmox VE vCPU overcommit ratios, RAM headroom for ZFS ARC, and disk allocations across LXC containers and QEMU VMs. Includes an unprivileged pct create CLI command generator.">
+  <link rel="canonical" href="https://techsimpld.com/tools/proxmox-resource-sizer.html">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / SEO -->
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TechSimpld">
+  <meta property="og:url" content="https://techsimpld.com/tools/proxmox-resource-sizer.html">
+  <meta property="og:title" content="Proxmox LXC &amp; VM Resource Sizing Planner | TechSimpld">
+  <meta property="og:description"
+    content="Calculate safe Proxmox VE RAM, vCPU, and disk commitments and generate ready-to-run pct create commands.">
+  <meta property="og:image" content="https://techsimpld.com/images/proxmox01-host-specs.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Proxmox LXC &amp; VM Resource Sizer | TechSimpld">
+  <meta name="twitter:description"
+    content="Plan Proxmox VE host capacity, ZFS memory headroom, and generate pct create CLI commands in your browser.">
+  <meta name="twitter:image" content="https://techsimpld.com/images/proxmox01-host-specs.png">
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "TechSimpld Proxmox LXC & VM Resource Sizing Planner",
+    "url": "https://techsimpld.com/tools/proxmox-resource-sizer.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "TechSimpld",
+      "url": "https://techsimpld.com/about.html",
+      "sameAs": ["https://youtube.com/@TechSimpld", "https://github.com/techsimpld"]
+    },
+    "description": "Free client-side Proxmox VE capacity planner for calculating vCPU overcommit, RAM reserve, disk sizing, and pct create commands."
+  }
+  </script>
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://techsimpld.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://techsimpld.com/tools.html" },
+      { "@type": "ListItem", "position": 3, "name": "Proxmox Resource Sizer", "item": "https://techsimpld.com/tools/proxmox-resource-sizer.html" }
+    ]
+  }
+  </script>
+
+  <!-- DNS Prefetch & Preconnect -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="alternate icon" type="image/png" href="../favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/tools.css">
+</head>
+
+<body class="tools-page">
+
+  <!-- Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo-link">
+        TechSimpld<span class="logo-dot"></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="../about.html" class="nav-link">About</a></li>
+        <li><a href="../posts.html" class="nav-link">Posts</a></li>
+        <li><a href="../studio.html" class="nav-link">Studio</a></li>
+        <li><a href="../resources.html" class="nav-link">Resources</a></li>
+        <li><a href="../tools.html" class="nav-link active">Tools</a></li>
+        <li><a href="../contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://youtube.com/@TechSimpld" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" id="subscribeHeaderBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+          Subscribe
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="tools-container tool-standalone-main">
+
+    <section class="tools-hero">
+      <nav class="tool-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="../tools.html">Tools</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Proxmox Resource Sizer</span>
+      </nav>
+      <div class="tools-hero-row">
+        <div>
+          <h1 class="tools-title">Proxmox LXC &amp; VM <span>Resource Sizer</span></h1>
+          <p class="tool-intro-lead">
+            Over-allocating memory on a Proxmox VE host triggers the Linux Out-Of-Memory killer, while under-sizing leaves your cluster underutilized. Enter your physical CPU cores, host RAM, and storage pool below to model safe vCPU overcommit ratios, check ZFS memory headroom, and generate ready-to-run <code>pct create</code> commands.
+          </p>
+        </div>
+        <button type="button" class="tool-btn tool-btn-primary" id="copyProxmoxSummaryBtn">
+          Copy Sizing Summary
+        </button>
+      </div>
+    </section>
+
+    <section class="tool-section active" id="tool-proxmox">
+      <div class="tool-card">
+        <!-- Host Specifications Input Bar -->
+        <div class="calculator-input-card" style="background-color: var(--tools-card-inner); border: 1px solid var(--tools-border); border-radius: var(--tools-radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+          <h2 style="font-size: 1rem; color: var(--tools-text-primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>1. Host Hardware Specifications</span>
+            <span style="font-size: 0.75rem; color: var(--tools-text-muted); font-weight: normal;">(Your physical server capabilities)</span>
+          </h2>
+          <div class="ip-input-row">
+            <div class="form-group">
+              <label class="form-label" for="hostCpuCores">Physical CPU Cores</label>
+              <select class="form-select" id="hostCpuCores">
+                <option value="4">4 Cores (Quad-Core / N100)</option>
+                <option value="6">6 Cores (Hexa-Core)</option>
+                <option value="8" selected>8 Cores (Octa-Core)</option>
+                <option value="12">12 Cores</option>
+                <option value="16">16 Cores</option>
+                <option value="24">24 Cores</option>
+                <option value="32">32 Cores</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="hostRamGb">Physical Host RAM (GB)</label>
+              <select class="form-select" id="hostRamGb">
+                <option value="8">8 GB RAM</option>
+                <option value="16">16 GB RAM</option>
+                <option value="32" selected>32 GB RAM</option>
+                <option value="64">64 GB RAM</option>
+                <option value="128">128 GB RAM</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="hostDiskGb">Usable Storage Pool (GB)</label>
+              <input type="number" class="form-input" id="hostDiskGb" value="500" min="50" step="50">
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Resource Allocation Gauges -->
+        <div style="background-color: #0b1120; border: 1px solid var(--tools-border); border-radius: var(--tools-radius-md); padding: 1.25rem; margin-bottom: 2rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem;">
+            <h2 style="font-size: 1rem; color: var(--tools-text-primary); margin: 0;">2. Live Hypervisor Capacity &amp; Safety Meters</h2>
+            <span class="status-pill safe" id="proxmoxOverallStatus">Healthy Allocation</span>
+          </div>
+
+          <div class="meter-wrapper">
+            <div class="meter-header">
+              <span>RAM Allocation: <strong id="ramCommittedDisplay">13.5 GB</strong> / <span id="ramTotalDisplay">32.0 GB</span> (<span id="ramPercentDisplay">42%</span>)</span>
+              <span id="ramHeadroomDisplay" style="color: #4ade80;">18.5 GB Free for ZFS / Host</span>
+            </div>
+            <div class="meter-track">
+              <div class="meter-bar safe" id="ramMeterBar" style="width: 42%;"></div>
+            </div>
+            <span class="form-hint" style="margin-top: 0.25rem; display: block;">Includes 2.0 GB reserved for Proxmox VE root OS services. Warning triggers at 80% commitment.</span>
+          </div>
+
+          <div class="proxmox-meters-grid">
+            <div style="background-color: var(--tools-card-inner); border: 1px solid var(--tools-border); border-radius: var(--tools-radius-sm); padding: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                <span class="metric-label">vCPU Overcommit Ratio</span>
+                <span class="status-pill safe" id="vcpuStatusPill">1.75 : 1 (Safe)</span>
+              </div>
+              <div style="font-size: 1.4rem; font-weight: 700; color: var(--tools-text-primary);" id="vcpuStatsText">
+                14 vCPUs <span style="font-size: 0.85rem; font-weight: normal; color: var(--tools-text-muted);">across 8 cores</span>
+              </div>
+              <div style="font-size: 0.775rem; color: var(--tools-text-secondary); margin-top: 0.35rem;">
+                Homelab guideline: Up to 3.0:1 overcommit is safe for lightweight LXCs.
+              </div>
+            </div>
+
+            <div style="background-color: var(--tools-card-inner); border: 1px solid var(--tools-border); border-radius: var(--tools-radius-sm); padding: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                <span class="metric-label">Disk Storage Allocation</span>
+                <span style="font-family: monospace; font-size: 0.85rem; color: var(--tools-yellow);" id="diskStatsText">236 GB / 500 GB (47%)</span>
+              </div>
+              <div class="meter-track" style="height: 8px; margin: 0.5rem 0;">
+                <div class="meter-bar safe" id="diskMeterBar" style="width: 47%;"></div>
+              </div>
+              <div style="font-size: 0.775rem; color: var(--tools-text-secondary);">
+                Includes 20 GB reserved for Proxmox system boot. Free storage: <strong id="diskFreeText" style="color: #4ade80;">264 GB</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Workload Catalog Checklist -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+            <h2 style="font-size: 1rem; color: var(--tools-text-primary); margin: 0;">3. Workload Sizing Catalog</h2>
+            <div style="font-size: 0.8rem; color: var(--tools-text-muted);">
+              Check or uncheck workloads and adjust individual core/RAM allocations:
+            </div>
+          </div>
+
+          <div class="proxmox-workloads-grid" id="proxmoxWorkloadsGrid">
+            <!-- Dynamically populated via JS -->
+          </div>
+
+          <!-- Add Custom Workload Form -->
+          <div class="add-custom-workload-box">
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--tools-yellow);">+ Add Custom Workload:</span>
+            <input type="text" id="customWorkloadName" placeholder="Workload Name (e.g. Postgres DB)" style="flex-grow: 1; min-width: 140px;">
+            <select id="customWorkloadType" style="width: 90px;" aria-label="Workload Type">
+              <option value="lxc">LXC</option>
+              <option value="vm">VM</option>
+            </select>
+            <input type="number" id="customWorkloadCores" value="2" min="1" max="16" placeholder="Cores" style="width: 75px;" title="Cores" aria-label="CPU Cores">
+            <input type="number" id="customWorkloadRam" value="1024" min="64" step="128" placeholder="RAM (MB)" style="width: 100px;" title="RAM MB" aria-label="RAM in MB">
+            <input type="number" id="customWorkloadDisk" value="20" min="1" step="5" placeholder="Disk (GB)" style="width: 95px;" title="Disk GB" aria-label="Disk in GB">
+            <button type="button" class="tool-btn tool-btn-primary tool-btn-sm" id="addCustomWorkloadBtn">
+              Add Workload
+            </button>
+          </div>
+        </div>
+
+        <!-- Proxmox CLI Command Generator -->
+        <div style="margin-top: 2rem; background-color: var(--tools-card-inner); border: 1px solid var(--tools-border); border-radius: var(--tools-radius-md); padding: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <h2 style="font-size: 1rem; color: var(--tools-text-primary); margin-bottom: 0.2rem;">
+                Proxmox CLI Deployment Command (<code>pct create</code>)
+              </h2>
+              <p style="font-size: 0.8rem; color: var(--tools-text-muted); margin: 0;">
+                Generate the exact shell command to spin up an unprivileged, nested LXC container on Proxmox VE:
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <label for="cliTargetSelect" style="font-size: 0.8rem; color: var(--tools-text-secondary);">Select Service:</label>
+              <select class="form-select" id="cliTargetSelect" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.85rem;">
+                <!-- Populated dynamically -->
+              </select>
+              <button type="button" class="tool-btn tool-btn-primary tool-btn-sm" id="copyCliCommandBtn">
+                Copy CLI Command
+              </button>
+            </div>
+          </div>
+          <div class="code-editor-area" style="min-height: auto; max-height: 180px;">
+            <pre class="code-pre" id="proxmoxCliOutput" style="white-space: pre-wrap; font-size: 0.85rem; color: #4ade80;"># Loading command...</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visible Editorial Guide -->
+    <article class="tool-editorial-guide">
+      <h2>Proxmox VE Sizing Rules of Thumb (Tested on a 3-Node OptiPlex 9020 Cluster)</h2>
+      <p>
+        Each node in the TechSimpld lab runs Proxmox VE 9.2 on a refurbished Dell OptiPlex 9020 with an Intel Core i7-4770 (4 cores / 8 threads) and 32 GB of DDR3 RAM, backed by Ceph storage across all three hosts. Because we run High Availability (HA), every node needs enough free RAM and CPU headroom to absorb workloads if another node goes down for maintenance.
+      </p>
+
+      <h3>LXC Containers vs. Full QEMU VMs</h3>
+      <ul>
+        <li><strong>Default to unprivileged LXC containers for Linux services:</strong> DNS sinks (Pi-hole, AdGuard Home), Uptime Kuma, Gotify, and reverse proxies share the host Linux kernel. They boot in seconds and idle at roughly 30 MB to 80 MB of RAM, letting a single 32 GB node comfortably host a dozen services.</li>
+        <li><strong>Reserve QEMU VMs for kernel isolation or non-Linux OSes:</strong> Use full virtual machines for Windows guests, Home Assistant OS, TrueNAS, or Docker hosts where you want strict kernel isolation and painless live migration across cluster nodes.</li>
+        <li><strong>Enable nesting carefully:</strong> The generated <code>pct create</code> command includes <code>--unprivileged 1 --features nesting=1</code> so modern systemd services inside Debian or Ubuntu templates start cleanly without privileged host exposure.</li>
+      </ul>
+
+      <h3>CPU Overcommit &amp; Memory Reserve Guidelines</h3>
+      <ul>
+        <li><strong>Safe vCPU overcommit (2.5:1 to 3:1):</strong> Most home lab containers sit below 5% CPU utilization 95% of the day. Assigning 20 to 24 total vCPUs on an 8-thread host works smoothly as long as you avoid overcommitting heavy databases, video transcoders, or game servers.</li>
+        <li><strong>Never allocate 100% of physical RAM:</strong> Proxmox VE itself needs roughly 2 GB for host services, plus memory for Ceph OSDs or ZFS ARC cache. On a 32 GB host, keeping total guest RAM commitments at or below 75% to 80% prevents the Linux OOM killer from silently terminating containers during nightly backups.</li>
+        <li><strong>Leave 20% storage headroom:</strong> Thin-provisioned LVM-thin, ZFS, and Ceph pools degrade sharply when they cross 80% utilization. Keep free pool space available for live VM snapshots and Proxmox Backup Server staging.</li>
+      </ul>
+
+      <h3>Related Proxmox Guides</h3>
+      <div class="tool-related-links">
+        <a href="../posts/budget-proxmox-home-lab-setup.html" class="tool-related-card">
+          <span class="tool-related-tag">Cluster Architecture</span>
+          <span class="tool-related-title">Budget 3-Node Proxmox Home Lab Setup</span>
+          <span class="tool-related-desc">Full hardware breakdown, Ceph storage layout, and HA failover walkthrough.</span>
+        </a>
+        <a href="../posts/container-vs-vm-which-should-you-use.html" class="tool-related-card">
+          <span class="tool-related-tag">Virtualization</span>
+          <span class="tool-related-title">Container vs. VM: Which Should You Use?</span>
+          <span class="tool-related-desc">Decision matrix for choosing between LXC, Docker, and full QEMU VMs.</span>
+        </a>
+        <a href="../posts/nextcloud-proxmox-cloudflare-tunnel-setup.html" class="tool-related-card">
+          <span class="tool-related-tag">Walkthrough</span>
+          <span class="tool-related-title">Nextcloud on Proxmox + Cloudflare Tunnel</span>
+          <span class="tool-related-desc">End-to-end deployment with zero open router ports.</span>
+        </a>
+        <a href="../posts/infrastructure-as-code-terraform-homelab.html" class="tool-related-card">
+          <span class="tool-related-tag">Automation</span>
+          <span class="tool-related-title">Infrastructure as Code with Terraform</span>
+          <span class="tool-related-desc">Automate Proxmox VM provisioning cleanly from versioned code.</span>
+        </a>
+      </div>
+
+      <h3>Other Home Lab Utilities</h3>
+      <div class="tools-sibling-nav">
+        <a href="docker-compose-generator.html" class="tools-sibling-link">Docker Compose Generator</a>
+        <a href="subnet-calculator.html" class="tools-sibling-link">IPv4 Subnet Calculator</a>
+        <a href="server-power-calculator.html" class="tools-sibling-link">Server Power &amp; TCO Calculator</a>
+        <a href="obsidian-markdown-formatter.html" class="tools-sibling-link">Obsidian Markdown Formatter</a>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div>
+        <a href="/" class="footer-logo">
+          TechSimpld<span class="logo-dot"></span>
+        </a>
+        <p class="footer-desc">
+          Software and productivity, simplified. Clean, no-fluff tutorials, blueprints, and interactive tools for digital creators and builders.
+        </p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../posts.html">Posts</a></li>
+          <li><a href="../resources.html">Resources</a></li>
+          <li><a href="../tools.html">Tools</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact &amp; Legal</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:techsimpld@gmail.com">techsimpld@gmail.com</a></li>
+          <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="../terms-of-service.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TechSimpld. All rights reserved. Client-side tools processed 100% in your browser.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/scripts.js"></script>
+  <script src="../js/tools.js"></script>
+</body>
+
+</html>

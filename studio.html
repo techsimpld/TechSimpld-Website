@@ -26,30 +26,30 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Simpld Studio | Free Self-Hosted YouTube Analytics &amp; Creator CRM</title>
+  <title>TechSimpld Studio | Free Self-Hosted YouTube Analytics &amp; Creator CRM</title>
   <meta name="description"
     content="Open-source, self-hosted YouTube creator studio built with FastAPI and SQLite. Track 48h velocity, retention curves, end-screen timing, audience CRM, and local Ollama AI.">
   <meta name="keywords"
-    content="Tech Simpld Studio, self-hosted YouTube analytics, open source VidIQ alternative, TubeBuddy alternative, YouTube retention optimizer, audience CRM, Docker YouTube studio, FastAPI, Ollama">
+    content="TechSimpld Studio, self-hosted YouTube analytics, open source VidIQ alternative, TubeBuddy alternative, YouTube retention optimizer, audience CRM, Docker YouTube studio, FastAPI, Ollama">
   <link rel="canonical" href="https://techsimpld.com/studio.html">
   <meta name="robots" content="index, follow">
 
   <!-- Open Graph / SEO -->
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Tech Simpld">
+  <meta property="og:site_name" content="TechSimpld">
   <meta property="og:url" content="https://techsimpld.com/studio.html">
-  <meta property="og:title" content="Tech Simpld Studio | Free Self-Hosted YouTube Analytics &amp; Creator CRM">
+  <meta property="og:title" content="TechSimpld Studio | Free Self-Hosted YouTube Analytics &amp; Creator CRM">
   <meta property="og:description"
     content="Run your own private YouTube creator command center on Docker, Proxmox LXC, or Windows. Local SQLite storage, retention curve analysis, audience CRM, and multi-model AI via LiteLLM.">
   <meta property="og:image" content="https://techsimpld.com/images/studio-analytics-ctr.jpg">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Tech Simpld Studio Channel Analytics and CTR dashboard interface">
+  <meta property="og:image:alt" content="TechSimpld Studio Channel Analytics and CTR dashboard interface">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tech Simpld Studio | Free Self-Hosted YouTube Analytics &amp; Creator CRM">
+  <meta name="twitter:title" content="TechSimpld Studio | Free Self-Hosted YouTube Analytics &amp; Creator CRM">
   <meta name="twitter:description"
     content="Open-source, self-hosted YouTube creator dashboard with 48h velocity curves, retention end-screen timing, audience CRM, and local Ollama AI. MIT Licensed.">
   <meta name="twitter:image" content="https://techsimpld.com/images/studio-analytics-ctr.jpg">
@@ -59,7 +59,7 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Tech Simpld Studio",
+    "name": "TechSimpld Studio",
     "alternateName": "Creator Studio",
     "url": "https://techsimpld.com/studio.html",
     "downloadUrl": "https://github.com/techsimpld/TechSimpld-Studio",
@@ -93,7 +93,7 @@
     ],
     "author": {
       "@type": "Organization",
-      "name": "Tech Simpld",
+      "name": "TechSimpld",
       "url": "https://techsimpld.com/",
       "sameAs": [
         "https://youtube.com/@TechSimpld",
@@ -119,7 +119,7 @@
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "Tech Simpld Studio",
+        "name": "TechSimpld Studio",
         "item": "https://techsimpld.com/studio.html"
       }
     ]
@@ -134,10 +134,10 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Does Tech Simpld Studio work with the free YouTube Data API v3 tier?",
+        "name": "Does TechSimpld Studio work with the free YouTube Data API v3 tier?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Google provides a default 10,000-unit daily quota on the YouTube Data API v3 free tier. Tech Simpld Studio tracks your live burn rate and automatically activates Safe Mode throttling when daily consumption crosses 85% so your sync jobs stay within the free limit."
+          "text": "Yes. Google provides a default 10,000-unit daily quota on the YouTube Data API v3 free tier. TechSimpld Studio tracks your live burn rate and automatically activates Safe Mode throttling when daily consumption crosses 85% so your sync jobs stay within the free limit."
         }
       },
       {
@@ -145,12 +145,12 @@
         "name": "Do I need paid AI API keys, or can I run everything locally?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Paid API keys are optional. Through LiteLLM, you can point Tech Simpld Studio at a local Ollama, vLLM, or LM Studio endpoint using OpenAI-compatible URLs. You can also mix providers, sending bulk transcript summaries to a local model and title ideation to Claude, OpenAI, or Gemini."
+          "text": "Paid API keys are optional. Through LiteLLM, you can point TechSimpld Studio at a local Ollama, vLLM, or LM Studio endpoint using OpenAI-compatible URLs. You can also mix providers, sending bulk transcript summaries to a local model and title ideation to Claude, OpenAI, or Gemini."
         }
       },
       {
         "@type": "Question",
-        "name": "Can I self-host Tech Simpld Studio without Docker?",
+        "name": "Can I self-host TechSimpld Studio without Docker?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. Alongside Docker Compose, the repository ships native installation scripts for Linux or Proxmox LXC (with a systemd service template) and Windows PowerShell 5.1 (using a standard Python 3.11+ virtual environment)."
@@ -158,7 +158,7 @@
       },
       {
         "@type": "Question",
-        "name": "Does Tech Simpld Studio send my channel analytics to any third-party server?",
+        "name": "Does TechSimpld Studio send my channel analytics to any third-party server?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No. Every snapshot, video metric, transcript, and viewer comment is stored locally in ./data/studio.db on your own machine. The container only talks to official YouTube API endpoints and any AI or Gotify services you explicitly configure."
@@ -166,7 +166,7 @@
       },
       {
         "@type": "Question",
-        "name": "How do I lock down access if I expose Tech Simpld Studio on my network?",
+        "name": "How do I lock down access if I expose TechSimpld Studio on my network?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "You can enable built-in username and password authentication via LOCAL_AUTH_ENABLED=True or connect Authentik OIDC Single Sign-On with PKCE. The app runs as a non-root user (UID 1000), validates same-origin headers on state-changing requests, blocks SSRF metadata targets, and sets strict OWASP security headers."
@@ -202,8 +202,8 @@
   <!-- Navigation Header -->
   <header class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="index.html" class="logo-link">
-        Tech Simpld<span class="logo-dot"></span>
+      <a href="/" class="logo-link">
+        TechSimpld<span class="logo-dot"></span>
       </a>
 
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
@@ -213,14 +213,13 @@
       </button>
 
       <ul class="nav-menu">
-        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="/" class="nav-link">Home</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="posts.html" class="nav-link">Posts</a></li>
         <li><a href="studio.html" class="nav-link active">Studio</a></li>
         <li><a href="resources.html" class="nav-link">Resources</a></li>
         <li><a href="tools.html" class="nav-link">Tools</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
-        <li><a href="https://youtube.com/@TechSimpld" target="_blank" rel="noopener noreferrer" class="nav-link">YouTube</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -245,7 +244,7 @@
     <section class="studio-hero" aria-labelledby="studioHeroHeading">
       <div>
         <h1 class="studio-hero-title" id="studioHeroHeading">
-          Tech Simpld <span>Studio</span>
+          TechSimpld <span>Studio</span>
         </h1>
         <p class="studio-hero-lead">
           An open-source, self-hosted YouTube analytics dashboard, retention optimizer, and audience CRM. Built with Python FastAPI and SQLite so your channel snapshots, transcripts, and viewer insights stay on your own hardware instead of inside a paid browser extension.
@@ -275,13 +274,13 @@
       <div>
         <button type="button" class="studio-shot-btn"
           data-full-src="images/studio-analytics-ctr.jpg"
-          data-full-alt="Tech Simpld Studio Channel Analytics and CTR dashboard showing average click-through rate, active subscribers, lifetime views, and audience acquisition split"
+          data-full-alt="TechSimpld Studio Channel Analytics and CTR dashboard showing average click-through rate, active subscribers, lifetime views, and audience acquisition split"
           data-full-title="Channel Analytics &amp; CTR Overview"
           aria-label="Inspect full-size screenshot of Channel Analytics and CTR dashboard">
           <picture>
             <source srcset="images/studio-analytics-ctr.webp" type="image/webp">
             <img src="images/studio-analytics-ctr.jpg"
-              alt="Tech Simpld Studio Channel Analytics and CTR dashboard showing average click-through rate, active subscribers, lifetime views, and audience acquisition split"
+              alt="TechSimpld Studio Channel Analytics and CTR dashboard showing average click-through rate, active subscribers, lifetime views, and audience acquisition split"
               width="1024" height="630" loading="eager" decoding="async">
           </picture>
           <span class="studio-shot-caption">
@@ -298,7 +297,7 @@
         <div class="studio-section-kicker">Own Your Channel Telemetry</div>
         <h2 class="studio-section-heading" id="whySelfHostHeading">Why I Replaced Paid Creator Extensions</h2>
         <p class="studio-section-desc">
-          Commercial YouTube plugins like VidIQ and TubeBuddy charge recurring monthly fees, inject cluttered overlays into your browser, and lock historical lookups behind higher tiers. Tech Simpld Studio flips that model: you host the backend yourself and keep a permanent local record of every metric and comment.
+          Commercial YouTube plugins like VidIQ and TubeBuddy charge recurring monthly fees, inject cluttered overlays into your browser, and lock historical lookups behind higher tiers. TechSimpld Studio flips that model: you host the backend yourself and keep a permanent local record of every metric and comment.
         </p>
       </div>
 
@@ -314,7 +313,7 @@
         </div>
 
         <div class="studio-compare-panel is-selfhosted">
-          <h3>Tech Simpld Studio (Self-Hosted)</h3>
+          <h3>TechSimpld Studio (Self-Hosted)</h3>
           <ul class="studio-compare-list">
             <li><strong>100% local SQLite archive:</strong> Every snapshot, transcript, and viewer comment lives in <code>./data/studio.db</code> on your server.</li>
             <li><strong>Focused strictly on your own channel:</strong> Uses official YouTube Data API v3 and YouTube Reporting API endpoints with zero third-party telemetry.</li>
@@ -331,7 +330,7 @@
         <div class="studio-section-kicker">Inside the Application</div>
         <h2 class="studio-section-heading" id="modulesHeading">Built Around Decisions Creators Actually Make</h2>
         <p class="studio-section-desc">
-          Instead of burying metrics across a dozen YouTube Studio tabs, each view in Tech Simpld Studio answers a concrete editorial question: when to publish, where viewers drop off, what hardware your audience runs, and which links in old descriptions have broken.
+          Instead of burying metrics across a dozen YouTube Studio tabs, each view in TechSimpld Studio answers a concrete editorial question: when to publish, where viewers drop off, what hardware your audience runs, and which links in old descriptions have broken.
         </p>
       </div>
 
@@ -341,13 +340,13 @@
           <div class="studio-spotlight-media">
             <button type="button" class="studio-shot-btn"
               data-full-src="images/studio-analytics-ctr.jpg"
-              data-full-alt="Tech Simpld Studio Channel Analytics and CTR panel displaying 8.4% CTR, subscriber vs non-subscriber discovery split, and OAuth token health"
+              data-full-alt="TechSimpld Studio Channel Analytics and CTR panel displaying 8.4% CTR, subscriber vs non-subscriber discovery split, and OAuth token health"
               data-full-title="Channel Analytics, CTR &amp; Discovery Split"
               aria-label="Inspect full-size screenshot of Channel Analytics and CTR">
               <picture>
                 <source srcset="images/studio-analytics-ctr.webp" type="image/webp">
                 <img src="images/studio-analytics-ctr.jpg"
-                  alt="Tech Simpld Studio Channel Analytics and CTR panel displaying 8.4% CTR, subscriber vs non-subscriber discovery split, and OAuth token health"
+                  alt="TechSimpld Studio Channel Analytics and CTR panel displaying 8.4% CTR, subscriber vs non-subscriber discovery split, and OAuth token health"
                   width="1024" height="630" loading="lazy" decoding="async">
               </picture>
               <span class="studio-shot-caption">
@@ -376,13 +375,13 @@
           <div class="studio-spotlight-media">
             <button type="button" class="studio-shot-btn"
               data-full-src="images/studio-audience-crm.jpg"
-              data-full-alt="Tech Simpld Studio Audience Knowledge Graph and CRM showing comments in vault, unique viewers, active superfans, and Audience Tech Ecosystem hardware fingerprint breakdown"
+              data-full-alt="TechSimpld Studio Audience Knowledge Graph and CRM showing comments in vault, unique viewers, active superfans, and Audience Tech Ecosystem hardware fingerprint breakdown"
               data-full-title="Audience Knowledge Graph &amp; Hardware Fingerprint CRM"
               aria-label="Inspect full-size screenshot of Audience Knowledge Graph and CRM">
               <picture>
                 <source srcset="images/studio-audience-crm.webp" type="image/webp">
                 <img src="images/studio-audience-crm.jpg"
-                  alt="Tech Simpld Studio Audience Knowledge Graph and CRM showing comments in vault, unique viewers, active superfans, and Audience Tech Ecosystem hardware fingerprint breakdown"
+                  alt="TechSimpld Studio Audience Knowledge Graph and CRM showing comments in vault, unique viewers, active superfans, and Audience Tech Ecosystem hardware fingerprint breakdown"
                   width="1024" height="661" loading="lazy" decoding="async">
               </picture>
               <span class="studio-shot-caption">
@@ -395,7 +394,7 @@
             <div class="studio-module-label">Module 02 / Audience &amp; Research</div>
             <h3>Audience Knowledge Graph, CRM &amp; Tech Stack Parser</h3>
             <p>
-              Comment sections hold your best future video topics, yet YouTube buries them after a week. Tech Simpld Studio archives viewer comments locally and parses recurring questions and tools automatically.
+              Comment sections hold your best future video topics, yet YouTube buries them after a week. TechSimpld Studio archives viewer comments locally and parses recurring questions and tools automatically.
             </p>
             <ul class="studio-feature-points">
               <li><strong>Superfan Leaderboard:</strong> Identifies loyal commenters with three or more lifetime comments while automatically excluding your own creator replies.</li>
@@ -411,13 +410,13 @@
           <div class="studio-spotlight-media">
             <button type="button" class="studio-shot-btn"
               data-full-src="images/studio-retention-optimizer.jpg"
-              data-full-alt="Tech Simpld Studio Retention and End-Screen Optimizer showing optimal end screen time, optimal info card time, outro cliff timestamp, 30-second intro hook retention, and retention curve graph"
+              data-full-alt="TechSimpld Studio Retention and End-Screen Optimizer showing optimal end screen time, optimal info card time, outro cliff timestamp, 30-second intro hook retention, and retention curve graph"
               data-full-title="Retention Curve &amp; End-Screen Optimizer"
               aria-label="Inspect full-size screenshot of Retention and End-Screen Optimizer">
               <picture>
                 <source srcset="images/studio-retention-optimizer.webp" type="image/webp">
                 <img src="images/studio-retention-optimizer.jpg"
-                  alt="Tech Simpld Studio Retention and End-Screen Optimizer showing optimal end screen time, optimal info card time, outro cliff timestamp, 30-second intro hook retention, and retention curve graph"
+                  alt="TechSimpld Studio Retention and End-Screen Optimizer showing optimal end screen time, optimal info card time, outro cliff timestamp, 30-second intro hook retention, and retention curve graph"
                   width="1024" height="674" loading="lazy" decoding="async">
               </picture>
               <span class="studio-shot-caption">
@@ -574,7 +573,7 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000</code></pre>
         <div class="studio-section-kicker">Architecture &amp; Operations</div>
         <h2 class="studio-section-heading" id="archHeading">Multi-Model AI Routing &amp; Security Hardening</h2>
         <p class="studio-section-desc">
-          Tech Simpld Studio was engineered for home lab operators who care about API costs, quota limits, and reverse-proxy security. Every safeguard below ships enabled or configurable via environment variables.
+          TechSimpld Studio was engineered for home lab operators who care about API costs, quota limits, and reverse-proxy security. Every safeguard below ships enabled or configurable via environment variables.
         </p>
       </div>
 
@@ -645,12 +644,12 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000</code></pre>
       <div class="studio-faq-list">
         <details class="studio-faq-item">
           <summary>
-            <span>Does Tech Simpld Studio work with the free YouTube Data API v3 tier?</span>
+            <span>Does TechSimpld Studio work with the free YouTube Data API v3 tier?</span>
             <span class="studio-faq-plus" aria-hidden="true">+</span>
           </summary>
           <div class="studio-faq-answer">
             <p>
-              Yes. Google grants 10,000 free API units per day by default. Tech Simpld Studio monitors your daily quota consumption and automatically switches on Safe Mode throttling once usage passes 85%, preventing runaway sync jobs from exhausting your quota.
+              Yes. Google grants 10,000 free API units per day by default. TechSimpld Studio monitors your daily quota consumption and automatically switches on Safe Mode throttling once usage passes 85%, preventing runaway sync jobs from exhausting your quota.
             </p>
           </div>
         </details>
@@ -681,7 +680,7 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000</code></pre>
 
         <details class="studio-faq-item">
           <summary>
-            <span>Does Tech Simpld Studio send my channel analytics to Tech Simpld or any third party?</span>
+            <span>Does TechSimpld Studio send my channel analytics to TechSimpld or any third party?</span>
             <span class="studio-faq-plus" aria-hidden="true">+</span>
           </summary>
           <div class="studio-faq-answer">
@@ -748,8 +747,8 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000</code></pre>
   <footer class="footer">
     <div class="footer-container">
       <div>
-        <a href="index.html" class="footer-logo">
-          Tech Simpld<span class="logo-dot"></span>
+        <a href="/" class="footer-logo">
+          TechSimpld<span class="logo-dot"></span>
         </a>
         <p class="footer-desc">
           Software and productivity, simplified. Clean, no-fluff tutorials and self-hosted tools for digital creators and
@@ -759,31 +758,29 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000</code></pre>
       <div>
         <h4 class="footer-heading">Navigation</h4>
         <ul class="footer-links">
-          <li><a href="index.html">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="posts.html">Posts</a></li>
           <li><a href="studio.html">Studio</a></li>
           <li><a href="resources.html">Resources</a></li>
           <li><a href="tools.html">Tools</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://youtube.com/@TechSimpld" target="_blank" rel="noopener noreferrer">YouTube Channel</a></li>
         </ul>
       </div>
       <div>
         <h4 class="footer-heading">Contact &amp; Legal</h4>
         <ul class="footer-links">
           <li><a href="mailto:techsimpld@gmail.com">techsimpld@gmail.com</a></li>
-          <li><a href="https://github.com/techsimpld/TechSimpld-Studio" target="_blank" rel="noopener noreferrer">Tech Simpld Studio (GitHub)</a></li>
+          <li><a href="https://github.com/techsimpld/TechSimpld-Studio" target="_blank" rel="noopener noreferrer">TechSimpld Studio (GitHub)</a></li>
           <li><a href="privacy-policy.html">Privacy Policy</a></li>
           <li><a href="terms-of-service.html">Terms of Service</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© 2026 Tech Simpld. All rights reserved. Built for lightning-fast speeds.</div>
+      <div>© 2026 TechSimpld. All rights reserved. Built for lightning-fast speeds.</div>
       <div class="footer-socials">
         <a href="https://github.com/techsimpld/TechSimpld-Studio" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">GitHub</a>
-        <a href="https://youtube.com/@TechSimpld" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">YouTube</a>
       </div>
     </div>
   </footer>

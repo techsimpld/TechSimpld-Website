@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KFGHVDB66"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-1KFGHVDB66');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5214277715351322"
+    crossorigin="anonymous"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Compose &amp; .env Generator for Home Labs | TechSimpld</title>
+  <meta name="description"
+    content="Build clean, production-ready docker-compose.yml and .env files for self-hosted apps in your browser. Includes volume path normalization, PUID/PGID mapping, and custom port overrides.">
+  <link rel="canonical" href="https://techsimpld.com/tools/docker-compose-generator.html">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / SEO -->
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TechSimpld">
+  <meta property="og:url" content="https://techsimpld.com/tools/docker-compose-generator.html">
+  <meta property="og:title" content="Docker Compose &amp; .env Generator for Home Labs | TechSimpld">
+  <meta property="og:description"
+    content="Generate paired docker-compose.yml and .env files for self-hosted services with clean bridge networks, restart policies, and PUID/PGID permissions.">
+  <meta property="og:image" content="https://techsimpld.com/images/docker-vs-podman.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Docker Compose &amp; .env Generator | TechSimpld">
+  <meta name="twitter:description"
+    content="Client-side Docker Compose and .env builder for self-hosters. Zero server tracking.">
+  <meta name="twitter:image" content="https://techsimpld.com/images/docker-vs-podman.png">
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "TechSimpld Docker Compose & .env Generator",
+    "url": "https://techsimpld.com/tools/docker-compose-generator.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "TechSimpld",
+      "url": "https://techsimpld.com/about.html",
+      "sameAs": ["https://youtube.com/@TechSimpld", "https://github.com/techsimpld"]
+    },
+    "description": "Free client-side Docker Compose and .env file generator for self-hosted home lab stacks."
+  }
+  </script>
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://techsimpld.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://techsimpld.com/tools.html" },
+      { "@type": "ListItem", "position": 3, "name": "Docker Compose Generator", "item": "https://techsimpld.com/tools/docker-compose-generator.html" }
+    ]
+  }
+  </script>
+
+  <!-- DNS Prefetch & Preconnect -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="alternate icon" type="image/png" href="../favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/tools.css">
+</head>
+
+<body class="tools-page">
+
+  <!-- Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo-link">
+        TechSimpld<span class="logo-dot"></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="../about.html" class="nav-link">About</a></li>
+        <li><a href="../posts.html" class="nav-link">Posts</a></li>
+        <li><a href="../studio.html" class="nav-link">Studio</a></li>
+        <li><a href="../resources.html" class="nav-link">Resources</a></li>
+        <li><a href="../tools.html" class="nav-link active">Tools</a></li>
+        <li><a href="../contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://youtube.com/@TechSimpld" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" id="subscribeHeaderBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+          Subscribe
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="tools-container tool-standalone-main">
+
+    <section class="tools-hero">
+      <nav class="tool-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="../tools.html">Tools</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Docker Compose Generator</span>
+      </nav>
+      <div class="tools-hero-row">
+        <div>
+          <h1 class="tools-title">Docker Compose &amp; <span>.env Generator</span></h1>
+          <p class="tool-intro-lead">
+            Hand-writing multi-service YAML files makes it easy to miss indentation, mix up host ports, or accidentally hardcode secrets inside version-controlled compose files. Pick the self-hosted apps you want to run, set one base storage path and timezone, and export a clean <code>docker-compose.yml</code> paired with a separate <code>.env</code> template directly in your browser.
+          </p>
+        </div>
+        <div class="tools-count-meta">100% Client-Side</div>
+      </div>
+    </section>
+
+    <section class="tool-section active" id="tool-docker">
+      <div class="tool-card">
+        <div class="docker-grid-layout">
+          <!-- Left Column: App Selection & Controls -->
+          <div>
+            <div style="margin-bottom: 1.5rem;">
+              <label class="form-label">
+                1. Select Self-Hosted Applications
+                <span class="required">*</span>
+              </label>
+              <div class="app-selection-grid" id="dockerAppsGrid">
+                <!-- Dynamically populated via JS -->
+              </div>
+              <button type="button" class="tool-btn tool-btn-secondary tool-btn-sm" id="addCustomServiceBtn">
+                + Add Custom Service
+              </button>
+            </div>
+
+            <div style="margin-bottom: 1.5rem; background: var(--tools-card-inner); padding: 1.25rem; border-radius: var(--tools-radius-md); border: 1px solid var(--tools-border);">
+              <label class="form-label" style="color: var(--tools-yellow);">2. Global Environment Settings</label>
+              <div class="config-row">
+                <div class="form-group">
+                  <label class="form-label" for="dockerProjectName">Project Name</label>
+                  <input type="text" class="form-input" id="dockerProjectName" value="homelab" spellcheck="false">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="dockerBaseDir">Base Storage Path</label>
+                  <input type="text" class="form-input" id="dockerBaseDir" value="./data" spellcheck="false">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="dockerTimezone">Timezone (TZ)</label>
+                  <input type="text" class="form-input" id="dockerTimezone" value="America/New_York" spellcheck="false">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="dockerPuid">PUID / PGID</label>
+                  <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" class="form-input" id="dockerPuid" value="1000" title="PUID">
+                    <input type="text" class="form-input" id="dockerPgid" value="1000" title="PGID">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="dockerRestartPolicy">Restart Policy</label>
+                  <select class="form-select" id="dockerRestartPolicy">
+                    <option value="unless-stopped" selected>unless-stopped</option>
+                    <option value="always">always</option>
+                    <option value="on-failure">on-failure</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="dockerNetworkName">Bridge Network</label>
+                  <input type="text" class="form-input" id="dockerNetworkName" value="homelab_net" spellcheck="false">
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">3. Service Port &amp; Volume Customization</label>
+              <div id="dockerServiceSettings">
+                <!-- Dynamically rendered per selected app -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Live Output Code Box -->
+          <div>
+            <div class="code-preview-container">
+              <div class="code-preview-header">
+                <div class="code-tabs">
+                  <button type="button" class="code-tab-btn active" data-code-view="compose">docker-compose.yml</button>
+                  <button type="button" class="code-tab-btn" data-code-view="env">.env template</button>
+                </div>
+                <div class="code-preview-actions">
+                  <button type="button" class="tool-btn tool-btn-secondary tool-btn-sm" id="copyComposeBtn" title="Copy compose file">
+                    Copy Compose
+                  </button>
+                  <button type="button" class="tool-btn tool-btn-secondary tool-btn-sm" id="copyEnvBtn" title="Copy env file">
+                    Copy .env
+                  </button>
+                </div>
+              </div>
+
+              <div class="code-editor-area">
+                <pre class="code-pre" id="dockerComposeCode"></pre>
+                <pre class="code-pre" id="dockerEnvCode" style="display: none;"></pre>
+              </div>
+
+              <div style="padding: 0.85rem 1.25rem; background: #090e1a; border-top: 1px solid var(--tools-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <span style="font-size: 0.8rem; color: var(--tools-text-muted);">
+                  Place both files in the same directory and run <code style="color:var(--tools-yellow);">docker compose up -d</code>
+                </span>
+                <div style="display: flex; gap: 0.5rem;">
+                  <button type="button" class="tool-btn tool-btn-primary tool-btn-sm" id="downloadComposeBtn">
+                    Download compose.yml
+                  </button>
+                  <button type="button" class="tool-btn tool-btn-primary tool-btn-sm" id="downloadEnvBtn">
+                    Download .env
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visible Editorial Guide -->
+    <article class="tool-editorial-guide">
+      <h2>How to Structure Production-Safe Docker Compose Stacks</h2>
+      <p>
+        On my 3-node Dell OptiPlex 9020 Proxmox VE cluster (<code>proxmox01</code>, <code>proxmox02</code>, and <code>proxmox03</code>), Docker hosts live inside dedicated VMs or unprivileged LXC containers on VLAN 100. The single biggest difference between a fragile weekend test stack and a home lab that survives reboots and upgrades is consistent directory layout and clean separation between configuration and secrets.
+      </p>
+
+      <h3>Step-by-Step Deployment Workflow</h3>
+      <ol>
+        <li><strong>Select your core services:</strong> Check the applications you want to deploy together, such as AdGuard Home, Uptime Kuma, Gotify, or CouchDB. Keep unrelated services in separate Compose directories so restarting one app does not disrupt your DNS or monitoring stack.</li>
+        <li><strong>Standardize your base storage path:</strong> Setting a predictable root like <code>/opt/homelab/data</code> or <code>./data</code> keeps every bind mount under one folder. When Proxmox Backup Server (PBS) or <code>rsync</code> runs nightly snapshots, backing up that single directory captures every database and config file.</li>
+        <li><strong>Verify PUID and PGID ownership:</strong> Run <code>id</code> on your Linux host before starting containers. Matching <code>PUID=1000</code> and <code>PGID=1000</code> prevents containers from writing root-owned files that lock out your regular user during edits or backups.</li>
+        <li><strong>Check for host port conflicts:</strong> Ubuntu hosts running <code>systemd-resolved</code> bind port <code>53</code> by default, which collides with Pi-hole and AdGuard Home. Override conflicting host ports in step 3 above, or disable the stub listener before running <code>docker compose up -d</code>.</li>
+      </ol>
+
+      <h3>Security &amp; Maintenance Rules of Thumb</h3>
+      <ul>
+        <li><strong>Never commit secrets to YAML:</strong> Keep database passwords, API tokens, and tunnel keys inside <code>.env</code> and add <code>.env</code> to <code>.gitignore</code>. If you share or back up your <code>docker-compose.yml</code>, your credentials stay local.</li>
+        <li><strong>Bind to localhost behind tunnels or reverse proxies:</strong> If a service is only accessed through a Cloudflare Zero Trust Tunnel or Nginx Proxy Manager on the same host, bind its port as <code>127.0.0.1:8080:8080</code> instead of <code>8080:8080</code> so it is not exposed on your LAN interface.</li>
+        <li><strong>Avoid blind auto-updates on databases:</strong> Use a delayed updater like Arcane with version pinning rather than blindly pulling <code>:latest</code> on PostgreSQL or CouchDB containers, where a major version jump can require manual schema migration.</li>
+        <li><strong>Use named user-defined bridge networks:</strong> Placing related containers on a dedicated bridge network (such as <code>homelab_net</code>) enables automatic Docker DNS resolution by container name, so Uptime Kuma can ping <code>http://gotify:80</code> without hardcoded LAN IPs.</li>
+      </ul>
+
+      <h3>Related Home Lab Guides</h3>
+      <div class="tool-related-links">
+        <a href="../posts/gotify-self-hosted-push-notifications.html" class="tool-related-card">
+          <span class="tool-related-tag">Docker Guide</span>
+          <span class="tool-related-title">Self-Hosted Push Notifications with Gotify</span>
+          <span class="tool-related-desc">Deploy Gotify with Docker Compose and wire up instant server alerts.</span>
+        </a>
+        <a href="../posts/adguard-home-1-0-beta-setup-guide.html" class="tool-related-card">
+          <span class="tool-related-tag">DNS &amp; Networking</span>
+          <span class="tool-related-title">AdGuard Home Setup Guide</span>
+          <span class="tool-related-desc">Configure network-wide ad blocking, custom rules, and port 53 cleanly.</span>
+        </a>
+        <a href="../posts/sync-obsidian-for-free-couchdb.html" class="tool-related-card">
+          <span class="tool-related-tag">Self-Hosted Sync</span>
+          <span class="tool-related-title">Sync Obsidian for Free with CouchDB</span>
+          <span class="tool-related-desc">Run a private LiveSync CouchDB container behind HTTPS.</span>
+        </a>
+        <a href="../posts/arcane-docker-watchtower-replacement.html" class="tool-related-card">
+          <span class="tool-related-tag">Maintenance</span>
+          <span class="tool-related-title">Replace Watchtower with Arcane</span>
+          <span class="tool-related-desc">Add 48-hour update delays and version locks to your Docker stacks.</span>
+        </a>
+      </div>
+
+      <h3>Other Home Lab Utilities</h3>
+      <div class="tools-sibling-nav">
+        <a href="proxmox-resource-sizer.html" class="tools-sibling-link">Proxmox Resource Sizer</a>
+        <a href="subnet-calculator.html" class="tools-sibling-link">IPv4 Subnet Calculator</a>
+        <a href="server-power-calculator.html" class="tools-sibling-link">Server Power &amp; TCO Calculator</a>
+        <a href="obsidian-markdown-formatter.html" class="tools-sibling-link">Obsidian Markdown Formatter</a>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div>
+        <a href="/" class="footer-logo">
+          TechSimpld<span class="logo-dot"></span>
+        </a>
+        <p class="footer-desc">
+          Software and productivity, simplified. Clean, no-fluff tutorials, blueprints, and interactive tools for digital creators and builders.
+        </p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../posts.html">Posts</a></li>
+          <li><a href="../resources.html">Resources</a></li>
+          <li><a href="../tools.html">Tools</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact &amp; Legal</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:techsimpld@gmail.com">techsimpld@gmail.com</a></li>
+          <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="../terms-of-service.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TechSimpld. All rights reserved. Client-side tools processed 100% in your browser.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/scripts.js"></script>
+  <script src="../js/tools.js"></script>
+</body>
+
+</html>

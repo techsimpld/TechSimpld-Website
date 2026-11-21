@@ -1,7 +1,7 @@
 /* 
-  Tech Simpld - Script
+  TechSimpld - Script
   Provides interactivity: mobile menu, forms validation, mock resources download.
-  Author: Tech Simpld
+  Author: TechSimpld
 */
 
 document.addEventListener('DOMContentLoaded', () => {

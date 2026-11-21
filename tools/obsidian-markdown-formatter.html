@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KFGHVDB66"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-1KFGHVDB66');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5214277715351322"
+    crossorigin="anonymous"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obsidian Markdown Table &amp; YAML Frontmatter Formatter | TechSimpld</title>
+  <meta name="description"
+    content="Convert CSV, spreadsheet rows, and messy notes into aligned GitHub-Flavored Markdown tables and clean Obsidian YAML frontmatter properties. 100% client-side with zero uploads.">
+  <link rel="canonical" href="https://techsimpld.com/tools/obsidian-markdown-formatter.html">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / SEO -->
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TechSimpld">
+  <meta property="og:url" content="https://techsimpld.com/tools/obsidian-markdown-formatter.html">
+  <meta property="og:title" content="Obsidian Markdown Table &amp; Frontmatter Formatter | TechSimpld">
+  <meta property="og:description"
+    content="Format CSV tables, align Markdown columns, and clean Obsidian YAML frontmatter locally in your browser.">
+  <meta property="og:image" content="https://techsimpld.com/images/obsidian-vault.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Obsidian Markdown &amp; Frontmatter Formatter | TechSimpld">
+  <meta name="twitter:description"
+    content="Client-side Markdown table aligner, CSV converter, and Obsidian YAML frontmatter cleaner.">
+  <meta name="twitter:image" content="https://techsimpld.com/images/obsidian-vault.png">
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "TechSimpld Obsidian Markdown & Frontmatter Formatter",
+    "url": "https://techsimpld.com/tools/obsidian-markdown-formatter.html",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "TechSimpld",
+      "url": "https://techsimpld.com/about.html",
+      "sameAs": ["https://youtube.com/@TechSimpld", "https://github.com/techsimpld"]
+    },
+    "description": "Free client-side Markdown table formatter, YAML frontmatter normalizer, and Obsidian note cleaner."
+  }
+  </script>
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://techsimpld.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://techsimpld.com/tools.html" },
+      { "@type": "ListItem", "position": 3, "name": "Obsidian Markdown Formatter", "item": "https://techsimpld.com/tools/obsidian-markdown-formatter.html" }
+    ]
+  }
+  </script>
+
+  <!-- DNS Prefetch & Preconnect -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="alternate icon" type="image/png" href="../favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/tools.css">
+</head>
+
+<body class="tools-page">
+
+  <!-- Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo-link">
+        TechSimpld<span class="logo-dot"></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="../about.html" class="nav-link">About</a></li>
+        <li><a href="../posts.html" class="nav-link">Posts</a></li>
+        <li><a href="../studio.html" class="nav-link">Studio</a></li>
+        <li><a href="../resources.html" class="nav-link">Resources</a></li>
+        <li><a href="../tools.html" class="nav-link active">Tools</a></li>
+        <li><a href="../contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://youtube.com/@TechSimpld" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" id="subscribeHeaderBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+          Subscribe
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="tools-container tool-standalone-main">
+
+    <section class="tools-hero">
+      <nav class="tool-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="../tools.html">Tools</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Obsidian Markdown Formatter</span>
+      </nav>
+      <div class="tools-hero-row">
+        <div>
+          <h1 class="tools-title">Obsidian Markdown &amp; <span>Frontmatter Formatter</span></h1>
+          <p class="tool-intro-lead">
+            Pasting spreadsheet rows, server inventories, or loose meeting notes into Obsidian often leaves ragged pipe tables and broken YAML properties that trip up Dataview queries. Paste your raw text below to align GitHub-Flavored Markdown tables, normalize YAML frontmatter, or clean headings and bullet lists without sending private notes to any server.
+          </p>
+        </div>
+        <div class="tools-count-meta">Private &amp; Local</div>
+      </div>
+    </section>
+
+    <section class="tool-section active" id="tool-markdown">
+      <div class="tool-card">
+        <!-- Controls Toolbar -->
+        <div class="format-controls-bar">
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <label for="mdModeSelect" class="form-label" style="margin-bottom: 0;">Mode:</label>
+            <select class="form-select" id="mdModeSelect" style="width: auto;">
+              <option value="table" selected>Markdown Table Formatter</option>
+              <option value="frontmatter">YAML Frontmatter Properties</option>
+              <option value="obsidian">Smart Obsidian Note Helper</option>
+            </select>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <label for="mdDelimiterSelect" class="form-label" style="margin-bottom: 0;">Delimiter:</label>
+            <select class="form-select" id="mdDelimiterSelect" style="width: auto;">
+              <option value="auto" selected>Auto Detect</option>
+              <option value="comma">Comma (CSV)</option>
+              <option value="pipe">Pipe (|)</option>
+              <option value="tab">Tab (TSV)</option>
+              <option value="semicolon">Semicolon (;)</option>
+            </select>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <label for="mdAlignSelect" class="form-label" style="margin-bottom: 0;">Alignment:</label>
+            <select class="form-select" id="mdAlignSelect" style="width: auto;">
+              <option value="left" selected>Left (:---)</option>
+              <option value="center">Center (:---:)</option>
+              <option value="right">Right (---:)</option>
+            </select>
+          </div>
+
+          <div style="display: flex; gap: 1rem; align-items: center; margin-left: auto;">
+            <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; cursor: pointer;">
+              <input type="checkbox" id="mdFirstRowHeader" checked> First row is header
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; cursor: pointer;">
+              <input type="checkbox" id="mdPadColumns" checked> Pad visual whitespace
+            </label>
+          </div>
+        </div>
+
+        <!-- Dual Pane Formatter -->
+        <div class="formatter-grid">
+          <div class="formatter-pane">
+            <div class="pane-header">
+              <span class="pane-title">Input (Raw text, CSV, or loose notes)</span>
+              <div class="sample-btns-bar">
+                <button type="button" class="tool-btn tool-btn-ghost tool-btn-sm" id="loadSampleCsvBtn">Sample CSV</button>
+                <button type="button" class="tool-btn tool-btn-ghost tool-btn-sm" id="loadSampleFrontmatterBtn">Sample Frontmatter</button>
+                <button type="button" class="tool-btn tool-btn-ghost tool-btn-sm" id="loadSampleNotesBtn">Sample Notes</button>
+                <button type="button" class="tool-btn tool-btn-ghost tool-btn-sm" id="clearMdBtn" style="color: #ef4444;">Clear</button>
+              </div>
+            </div>
+            <textarea class="form-textarea formatter-textarea" id="mdInputArea" placeholder="Paste your raw text, CSV table, notes, or frontmatter here..." spellcheck="false"></textarea>
+          </div>
+
+          <div class="formatter-pane">
+            <div class="pane-header">
+              <span class="pane-title">Formatted Output</span>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <span class="format-stat-badge" id="mdStatsLines">0 lines</span>
+                <span class="format-stat-badge" id="mdStatsWords">0 words</span>
+                <span class="format-stat-badge" id="mdStatsChars">0 chars</span>
+                <button type="button" class="tool-btn tool-btn-primary tool-btn-sm" id="copyMdOutputBtn">
+                  Copy Output
+                </button>
+                <button type="button" class="tool-btn tool-btn-secondary tool-btn-sm" id="downloadMdBtn">
+                  Download .md
+                </button>
+              </div>
+            </div>
+            <textarea class="form-textarea formatter-textarea" id="mdOutputArea" readonly placeholder="Your clean, aligned Markdown will appear here instantly..." spellcheck="false"></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visible Editorial Guide -->
+    <article class="tool-editorial-guide">
+      <h2>Formatting Clean Markdown &amp; YAML Properties for Obsidian</h2>
+      <p>
+        I document every IP reservation, VLAN assignment, and Proxmox container spec inside an Obsidian vault synced via self-hosted CouchDB. Keeping tables and YAML frontmatter consistent makes those notes readable in plain-text editors, diff-friendly in Git, and queryable with Obsidian's Properties panel and Dataview plugin.
+      </p>
+
+      <h3>What Each Formatter Mode Does</h3>
+      <ul>
+        <li><strong>Markdown Table Formatter:</strong> Parses unaligned pipe tables, comma-separated exports (CSV), tab-separated spreadsheet copies (TSV), or semicolon files and outputs evenly padded GitHub-Flavored Markdown tables with left, center, or right column alignment.</li>
+        <li><strong>YAML Frontmatter Properties:</strong> Cleans loose key-value pairs (such as <code>title</code>, <code>tags</code>, <code>date</code>, <code>status</code>, and <code>aliases</code>) and wraps them inside valid triple-dash delimiters (<code>---</code>) expected by Obsidian Properties, Hugo, Jekyll, and Astro.</li>
+        <li><strong>Smart Obsidian Note Helper:</strong> Fixes heading spacing, normalizes inconsistent bullet markers, trims trailing whitespace, and cleans inline tags so imported web clips or raw drafts match your vault conventions.</li>
+      </ul>
+
+      <h3>Tips for Dataview &amp; Long-Term Vault Hygiene</h3>
+      <ul>
+        <li><strong>Use lowercase keys in YAML frontmatter:</strong> Keys like <code>updated</code>, <code>status</code>, and <code>project</code> are case-sensitive in Dataview. Standardizing them lets queries like <code>TABLE file.mtime AS "Updated", status WHERE type = "homelab"</code> work reliably across hundreds of notes.</li>
+        <li><strong>Keep dates in ISO 8601 format (<code>YYYY-MM-DD</code>):</strong> ISO dates sort chronologically as plain text and parse cleanly in Obsidian Daily Notes, Templater, and Dataview without regional month/day ambiguity.</li>
+        <li><strong>Why client-side matters for notes:</strong> Personal knowledge bases often hold internal hostnames, network maps, or private journal entries. Every transformation in this formatter runs strictly in browser JavaScript with zero network requests.</li>
+      </ul>
+
+      <h3>Related Obsidian Guides</h3>
+      <div class="tool-related-links">
+        <a href="../posts/obsidian-second-brain-setup.html" class="tool-related-card">
+          <span class="tool-related-tag">Vault Setup</span>
+          <span class="tool-related-title">Obsidian Second Brain Setup</span>
+          <span class="tool-related-desc">Build a clean 4-folder vault structure with predictable frontmatter.</span>
+        </a>
+        <a href="../posts/obsidian-starter-vault-tutorial.html" class="tool-related-card">
+          <span class="tool-related-tag">Starter Template</span>
+          <span class="tool-related-title">Obsidian Starter Vault Tutorial</span>
+          <span class="tool-related-desc">Walkthrough of daily notes, Dataview dashboards, and Templater logic.</span>
+        </a>
+        <a href="../posts/3-obsidian-settings-you-must-change.html" class="tool-related-card">
+          <span class="tool-related-tag">Configuration</span>
+          <span class="tool-related-title">3 Obsidian Settings You Must Change</span>
+          <span class="tool-related-desc">Fix attachment paths, link formats, and default new-note locations early.</span>
+        </a>
+        <a href="../posts/sync-obsidian-for-free-couchdb.html" class="tool-related-card">
+          <span class="tool-related-tag">Self-Hosted Sync</span>
+          <span class="tool-related-title">Sync Obsidian for Free with CouchDB</span>
+          <span class="tool-related-desc">Keep your formatted Markdown vault synced across desktop and mobile privately.</span>
+        </a>
+      </div>
+
+      <h3>Other Home Lab Utilities</h3>
+      <div class="tools-sibling-nav">
+        <a href="docker-compose-generator.html" class="tools-sibling-link">Docker Compose Generator</a>
+        <a href="proxmox-resource-sizer.html" class="tools-sibling-link">Proxmox Resource Sizer</a>
+        <a href="subnet-calculator.html" class="tools-sibling-link">IPv4 Subnet Calculator</a>
+        <a href="server-power-calculator.html" class="tools-sibling-link">Server Power &amp; TCO Calculator</a>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div>
+        <a href="/" class="footer-logo">
+          TechSimpld<span class="logo-dot"></span>
+        </a>
+        <p class="footer-desc">
+          Software and productivity, simplified. Clean, no-fluff tutorials, blueprints, and interactive tools for digital creators and builders.
+        </p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../posts.html">Posts</a></li>
+          <li><a href="../resources.html">Resources</a></li>
+          <li><a href="../tools.html">Tools</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact &amp; Legal</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:techsimpld@gmail.com">techsimpld@gmail.com</a></li>
+          <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="../terms-of-service.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TechSimpld. All rights reserved. Client-side tools processed 100% in your browser.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/scripts.js"></script>
+  <script src="../js/tools.js"></script>
+</body>
+
+</html>

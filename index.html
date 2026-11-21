@@ -27,27 +27,27 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Simpld | Home Lab Tutorials, Self-Hosted Tools &amp; Tech Simpld Studio</title>
+  <title>TechSimpld | Home Lab Tutorials, Self-Hosted Tools &amp; TechSimpld Studio</title>
   <meta name="description"
-    content="Step-by-step, no-fluff guides for Proxmox, Docker, and Obsidian, plus Tech Simpld Studio: our free, open-source self-hosted YouTube analytics and creator CRM.">
+    content="Step-by-step, no-fluff guides for Proxmox, Docker, and Obsidian, plus TechSimpld Studio: our free, open-source self-hosted YouTube analytics and creator CRM.">
   <link rel="canonical" href="https://techsimpld.com/">
   <meta name="robots" content="index, follow">
 
   <!-- Open Graph / SEO -->
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Tech Simpld">
+  <meta property="og:site_name" content="TechSimpld">
   <meta property="og:url" content="https://techsimpld.com/">
-  <meta property="og:title" content="Tech Simpld | Home Lab Tutorials, Self-Hosted Tools &amp; Tech Simpld Studio">
+  <meta property="og:title" content="TechSimpld | Home Lab Tutorials, Self-Hosted Tools &amp; TechSimpld Studio">
   <meta property="og:description"
-    content="Step-by-step, no-fluff guides for Proxmox, Docker, and Obsidian, plus Tech Simpld Studio: our free, open-source self-hosted YouTube analytics and creator CRM.">
+    content="Step-by-step, no-fluff guides for Proxmox, Docker, and Obsidian, plus TechSimpld Studio: our free, open-source self-hosted YouTube analytics and creator CRM.">
   <meta property="og:image" content="https://techsimpld.com/images/studio-analytics-ctr.jpg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tech Simpld | Home Lab Tutorials, Self-Hosted Tools &amp; Tech Simpld Studio">
+  <meta name="twitter:title" content="TechSimpld | Home Lab Tutorials, Self-Hosted Tools &amp; TechSimpld Studio">
   <meta name="twitter:description"
-    content="Step-by-step, no-fluff guides for Proxmox, Docker, and Obsidian, plus Tech Simpld Studio: our free, open-source self-hosted YouTube analytics and creator CRM.">
+    content="Step-by-step, no-fluff guides for Proxmox, Docker, and Obsidian, plus TechSimpld Studio: our free, open-source self-hosted YouTube analytics and creator CRM.">
   <meta name="twitter:image" content="https://techsimpld.com/images/studio-analytics-ctr.jpg">
 
   <!-- Structured Data (JSON-LD) -->
@@ -55,7 +55,7 @@
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Tech Simpld",
+    "name": "TechSimpld",
     "url": "https://techsimpld.com/"
   }
   </script>
@@ -63,7 +63,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Tech Simpld",
+    "name": "TechSimpld",
     "url": "https://techsimpld.com/",
     "logo": "https://techsimpld.com/images/obsidian-vault.png",
     "sameAs": [
@@ -97,8 +97,8 @@
   <!-- Navigation Header -->
   <header class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="index.html" class="logo-link">
-        Tech Simpld<span class="logo-dot"></span>
+      <a href="/" class="logo-link">
+        TechSimpld<span class="logo-dot"></span>
       </a>
 
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
@@ -108,21 +108,19 @@
       </button>
 
       <ul class="nav-menu">
-        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="/" class="nav-link active">Home</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="posts.html" class="nav-link">Posts</a></li>
         <li><a href="studio.html" class="nav-link">Studio</a></li>
         <li><a href="resources.html" class="nav-link">Resources</a></li>
         <li><a href="tools.html" class="nav-link">Tools</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
-        <li><a href="https://youtube.com/@TechSimpld" target="_blank" class="nav-link">YouTube</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a href="https://youtube.com/@TechSimpld" target="_blank" class="btn btn-primary btn-sm" id="subscribeHeaderBtn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+        <a href="https://youtube.com/@TechSimpld" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" id="subscribeHeaderBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
           </svg>
           Subscribe
         </a>
@@ -144,15 +142,15 @@
       </p>
       <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
         <a href="posts.html" class="btn btn-primary btn-lg">Read the Latest Guides</a>
-        <a href="studio.html" class="btn btn-outline btn-lg">Tech Simpld Studio (Open Source)</a>
+        <a href="studio.html" class="btn btn-outline btn-lg">TechSimpld Studio (Open Source)</a>
       </div>
     </section>
 
-    <!-- Open-Source Release Spotlight: Tech Simpld Studio -->
+    <!-- Open-Source Release Spotlight: TechSimpld Studio -->
     <section id="techsimpld-studio-release" style="margin: 3.5rem 0 4.5rem;">
       <div class="section-header">
         <div>
-          <h2 class="section-title">Open-Source Release: Tech Simpld Studio</h2>
+          <h2 class="section-title">Open-Source Release: TechSimpld Studio</h2>
           <p class="section-subtitle">Self-hosted YouTube creator analytics, retention optimizer, and audience CRM built on FastAPI and SQLite</p>
         </div>
         <a href="studio.html" class="section-link">
@@ -169,7 +167,7 @@
           <div class="badge badge-cyan">MIT Open Source</div>
           <h2>Self-Host Your Own YouTube Creator Studio</h2>
           <p>
-            Skip paid browser extensions like VidIQ and TubeBuddy. Tech Simpld Studio runs locally on Docker, Proxmox LXC, or Windows, storing every channel snapshot, retention curve, transcript, and viewer comment inside your own SQLite database.
+            Skip paid browser extensions like VidIQ and TubeBuddy. TechSimpld Studio runs locally on Docker, Proxmox LXC, or Windows, storing every channel snapshot, retention curve, transcript, and viewer comment inside your own SQLite database.
           </p>
           <ul class="resource-features">
             <li>
@@ -218,11 +216,11 @@
           </div>
         </div>
         <div class="resource-preview">
-          <a href="studio.html" aria-label="View Tech Simpld Studio release page and screenshots">
+          <a href="studio.html" aria-label="View TechSimpld Studio release page and screenshots">
             <picture>
               <source srcset="images/studio-analytics-ctr.webp" type="image/webp">
               <img class="resource-preview-img" src="images/studio-analytics-ctr.jpg"
-                alt="Tech Simpld Studio Channel Analytics and CTR dashboard preview" width="1024" height="630"
+                alt="TechSimpld Studio Channel Analytics and CTR dashboard preview" width="1024" height="630"
                 loading="lazy" decoding="async">
             </picture>
           </a>
@@ -243,6 +241,32 @@
       </div>
       
       <div class="tutorials-grid">
+        <!-- Card 0: Stop Using Chrome (Manifest V3 vs Firefox) -->
+        <article class="card">
+          <div class="card-image-wrapper">
+            <a href="posts/stop-using-chrome-manifest-v3-firefox.html">
+              <picture>
+                <source srcset="images/stop-using-chrome-manifest-v3.webp" type="image/webp">
+                <img class="card-image" src="images/stop-using-chrome-manifest-v3.jpg" alt="Stop Using Chrome Manifest V3 vs Firefox Preview" loading="lazy" decoding="async">
+              </picture>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-category" style="color: var(--accent-cyan);">Privacy &amp; Security</span>
+              <span>•</span>
+              <span class="card-date">Nov 2026</span>
+            </div>
+            <h3 class="card-title"><a href="posts/stop-using-chrome-manifest-v3-firefox.html">The Honest Truth: Why You Should Stop Using Chrome</a></h3>
+            <p class="card-excerpt">
+              Manifest V3 ended classic uBlock Origin on Chrome. Compare webRequest vs. declarativeNetRequest, live 100/100 vs. 91/100 test scores, and how to switch to Firefox in 5 minutes.
+            </p>
+            <div class="card-footer">
+              <a href="posts/stop-using-chrome-manifest-v3-firefox.html" class="card-readmore">Read Guide &rarr;</a>
+            </div>
+          </div>
+        </article>
+
         <!-- Card 1: AdGuard Home 1.0 Beta -->
         <article class="card">
           <div class="card-image-wrapper">
@@ -339,7 +363,7 @@
       <div class="featured-resource">
         <div class="resource-info">
           <div class="badge badge-cyan">Featured Configuration</div>
-          <h2>The Tech Simpld Obsidian Starter Vault</h2>
+          <h2>The TechSimpld Obsidian Starter Vault</h2>
           <p>
             Skip the endless tweaking. Get my personal Obsidian configuration folder to access a fully designed personal wiki environment containing optimized stylesheets, markdown templates, and hotkeys.
           </p>
@@ -513,12 +537,12 @@
             <div class="card-meta">
               <span class="card-category" style="color: var(--accent-cyan);">Container Stack Builder</span>
             </div>
-            <h3 class="card-title"><a href="tools.html#docker">Docker Compose &amp; .env Generator</a></h3>
+            <h3 class="card-title"><a href="tools/docker-compose-generator.html">Docker Compose &amp; .env Generator</a></h3>
             <p class="card-excerpt">
               Select from curated self-hosted services (Nextcloud, Uptime Kuma, Gotify, Pi-hole, AdGuard, Jellyfin) to generate production-ready <code>docker-compose.yml</code> and separated <code>.env</code> secret files with custom volume mounts, restart policies, and PUID/PGID permissions.
             </p>
             <div class="card-footer">
-              <a href="tools.html#docker" class="card-readmore">Open Compose Generator &rarr;</a>
+              <a href="tools/docker-compose-generator.html" class="card-readmore">Open Compose Generator &rarr;</a>
             </div>
           </div>
         </article>
@@ -528,12 +552,12 @@
             <div class="card-meta">
               <span class="card-category" style="color: var(--accent-purple);">Hypervisor Capacity</span>
             </div>
-            <h3 class="card-title"><a href="tools.html#proxmox">Proxmox LXC &amp; VM Resource Sizer</a></h3>
+            <h3 class="card-title"><a href="tools/proxmox-resource-sizer.html">Proxmox LXC &amp; VM Resource Sizer</a></h3>
             <p class="card-excerpt">
               Calculate host CPU core overcommitment ratios, ZFS ARC memory reservations, and NVMe storage allocations before deploying workloads. Compare memory footprints between unprivileged LXC containers and full KVM virtual machines with ready-to-run <code>pct create</code> CLI commands.
             </p>
             <div class="card-footer">
-              <a href="tools.html#proxmox" class="card-readmore">Open Proxmox Sizer &rarr;</a>
+              <a href="tools/proxmox-resource-sizer.html" class="card-readmore">Open Proxmox Sizer &rarr;</a>
             </div>
           </div>
         </article>
@@ -543,12 +567,12 @@
             <div class="card-meta">
               <span class="card-category" style="color: var(--accent-cyan);">Network &amp; Power Planning</span>
             </div>
-            <h3 class="card-title"><a href="tools.html#subnet">IPv4 Subnet &amp; Server Power Calculators</a></h3>
+            <h3 class="card-title"><a href="tools/subnet-calculator.html">IPv4 Subnet &amp; Server Power Calculators</a></h3>
             <p class="card-excerpt">
-              Plan RFC 1918 VLAN boundaries, CIDR netmasks, and DHCP pools with our visual subnet splitter, or model 24/7 home server electricity draw, kWh utility rates, and 3-year hardware TCO breakeven against legacy enterprise rack gear using the <a href="tools.html#power" style="color: var(--accent-cyan);">Power &amp; Cost Calculator</a>.
+              Plan RFC 1918 VLAN boundaries, CIDR netmasks, and DHCP pools with our visual subnet splitter, or model 24/7 home server electricity draw, kWh utility rates, and 3-year hardware TCO breakeven against legacy enterprise rack gear using the <a href="tools/server-power-calculator.html" style="color: var(--accent-cyan);">Power &amp; Cost Calculator</a>.
             </p>
             <div class="card-footer">
-              <a href="tools.html#subnet" class="card-readmore">Open Network &amp; Power Tools &rarr;</a>
+              <a href="tools/subnet-calculator.html" class="card-readmore">Open Network &amp; Power Tools &rarr;</a>
             </div>
           </div>
         </article>
@@ -562,7 +586,7 @@
           <div class="badge badge-cyan" style="margin-bottom: 1rem;">20+ Years Enterprise IT Experience</div>
           <h2 style="font-size: 1.75rem; margin-bottom: 1rem;">Tested on Real Bare-Metal Hardware</h2>
           <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
-            Tech Simpld is built and maintained by a Microsoft Certified Systems Engineer (MCSA) with over two decades of experience managing enterprise virtualization and multi-datacenter storage architecture. Every command block, systemd unit, and network diagram published here is validated in our physical Proxmox testing cluster before publication.
+            TechSimpld is built and maintained by a Microsoft Certified Systems Engineer (MCSA) with over two decades of experience managing enterprise virtualization and multi-datacenter storage architecture. Every command block, systemd unit, and network diagram published here is validated in our physical Proxmox testing cluster before publication.
           </p>
           <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
             We focus on practical, reproducible configurations for hobbyists and self-hosters who want enterprise reliability without enterprise licensing costs or cloud lock-in.
@@ -595,8 +619,8 @@
   <footer class="footer">
     <div class="footer-container">
       <div>
-        <a href="index.html" class="footer-logo">
-          Tech Simpld<span class="logo-dot"></span>
+        <a href="/" class="footer-logo">
+          TechSimpld<span class="logo-dot"></span>
         </a>
         <p class="footer-desc">
           Software and productivity, simplified. Clean, no-fluff tutorials and templates for digital creators and
@@ -606,14 +630,13 @@
       <div>
         <h4 class="footer-heading">Navigation</h4>
         <ul class="footer-links">
-          <li><a href="index.html">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="posts.html">Posts</a></li>
           <li><a href="studio.html">Studio</a></li>
           <li><a href="resources.html">Resources</a></li>
           <li><a href="tools.html">Tools</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://youtube.com/@TechSimpld" target="_blank">YouTube Channel</a></li>
         </ul>
       </div>
       <div>
@@ -626,10 +649,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© 2026 Tech Simpld. All rights reserved. Built for lightning-fast speeds.</div>
-      <div class="footer-socials">
-        <a href="https://youtube.com/@TechSimpld" class="social-link" aria-label="YouTube">YouTube</a>
-      </div>
+      <div>© 2026 TechSimpld. All rights reserved. Built for lightning-fast speeds.</div>
     </div>
   </footer>
 
